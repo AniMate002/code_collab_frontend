@@ -11,8 +11,17 @@ export const AppRoutes: RouterType[] = [
   {
     title: "Login",
     path: RouterPaths.LOGIN,
+    skipLayout: true,
     element: React.lazy(
       () => import("../components/pages/Login/Login.page.tsx"),
+    ),
+  },
+  {
+    title: "Signup",
+    path: RouterPaths.SIGNUP,
+    skipLayout: true,
+    element: React.lazy(
+      () => import("../components/pages/Signup/Signup.page.tsx"),
     ),
   },
 ];

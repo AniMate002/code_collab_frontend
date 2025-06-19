@@ -8,8 +8,8 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputLabel-root": {
     paddingLeft: "8px",
     paddingRight: "8px",
-    paddingTop: "4px",
-    paddingBottom: "4px",
+    paddingTop: "1px",
+    // paddingBottom: "4px",
   },
   "& .MuiOutlinedInput-root": {
     borderRadius: theme.shape.borderRadius,

@@ -2,6 +2,7 @@ import React from "react";
 import { GlobalStyles } from "@mui/material";
 
 const GlobalStylesTemplate: React.FC = () => {
+  // TODO: add max width of 1300px for inner content
   return (
     <GlobalStyles
       styles={{

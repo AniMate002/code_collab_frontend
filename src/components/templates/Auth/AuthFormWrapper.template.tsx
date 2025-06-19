@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 
-export const LoginFormWrapper = styled(Box)(({ theme }) => ({
+export const AuthFormWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
