@@ -9,7 +9,8 @@ const GlobalStylesTemplate: React.FC = () => {
         "html, body, #root": {
           margin: 0,
           padding: 0,
-          height: "100%",
+          height: "100vh",
+          overflow: "hidden",
           backgroundColor: "#121417", // или твой основной фон
           boxSizing: "border-box",
         },

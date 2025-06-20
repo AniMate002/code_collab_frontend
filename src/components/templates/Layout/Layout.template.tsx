@@ -7,12 +7,10 @@ const LayoutTemplate: React.FC = () => {
   return (
     <>
       <Header />
-      <div>
-        <Sidebar />
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <Sidebar />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };
