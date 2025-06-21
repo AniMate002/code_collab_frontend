@@ -5,6 +5,6 @@ export const AuthFormWrapper = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: theme.spacing(3),
+  gap: theme.spacing(4),
   width: "450px",
 }));
