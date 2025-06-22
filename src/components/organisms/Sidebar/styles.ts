@@ -2,6 +2,7 @@ import { Box, styled } from "@mui/material";
 
 export const SidebarWrapper = styled(Box)(({ theme }) => ({
   position: "fixed",
+  zIndex: 50,
   left: 0,
   top: 0,
   display: "flex",

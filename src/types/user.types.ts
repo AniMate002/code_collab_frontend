@@ -4,6 +4,11 @@ export const userSchema = z.object({
   _id: z.string(),
   name: z.string(),
   email: z.string(),
+  avatar: z
+    .string()
+    .default(
+      "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg",
+    ),
   specialization: z.string(),
   skills: z.array(z.string()),
   rooms: z.array(z.string()),

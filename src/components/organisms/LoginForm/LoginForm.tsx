@@ -22,6 +22,10 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data).unwrap();
+      await Toast.fire({
+        icon: "success",
+        title: "Login successful",
+      });
     } catch (e: any) {
       await Toast.fire({
         icon: "error",

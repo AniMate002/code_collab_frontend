@@ -13,7 +13,6 @@ export const authApi = createApi({
   endpoints: (build) => ({
     getMe: build.query<User, void>({
       query: () => "/getMe",
-      responseSchema: userSchema,
       providesTags: [API_TAGS.AuthUser],
       transformResponse: (response: unknown): User => {
         const parsed = userSchema.safeParse(response);
@@ -59,7 +58,23 @@ export const authApi = createApi({
       },
       invalidatesTags: [API_TAGS.AuthUser],
     }),
+
+    logout: build.mutation<void, void>({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(authApi.util.resetApiState());
+      },
+    }),
   }),
 });
 
-export const { useGetMeQuery, useLoginMutation, useSignupMutation } = authApi;
+export const {
+  useGetMeQuery,
+  useLoginMutation,
+  useSignupMutation,
+  useLogoutMutation,
+} = authApi;

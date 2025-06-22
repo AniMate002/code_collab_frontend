@@ -22,6 +22,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: authUser, isLoading, isError, error } = useGetMeQuery();
 
   useEffect(() => {
+    console.log(authUser);
     if (authUser) setIsAuth(true);
     else setIsAuth(false);
   }, [authUser]);

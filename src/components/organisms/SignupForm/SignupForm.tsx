@@ -30,6 +30,10 @@ const SignupForm: React.FC = () => {
     }
     try {
       await signup(data).unwrap();
+      await Toast.fire({
+        icon: "success",
+        title: "Signup successful",
+      });
     } catch (e: any) {
       await Toast.fire({
         icon: "error",
