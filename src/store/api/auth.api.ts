@@ -14,15 +14,8 @@ export const authApi = createApi({
     getMe: build.query<User, void>({
       query: () => "/getMe",
       providesTags: [API_TAGS.AuthUser],
-      transformResponse: (response: unknown): User => {
-        const parsed = userSchema.safeParse(response);
-        console.log(parsed);
-        if (!parsed.success) {
-          console.log(parsed);
-          throw new Error("Invalid response");
-        }
-        return parsed.data;
-      },
+      rawResponseSchema: userSchema,
+      keepUnusedDataFor: 0,
     }),
 
     login: build.mutation({
@@ -31,14 +24,7 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
-      transformResponse: (response: unknown): User => {
-        const parsed = userSchema.safeParse(response);
-        if (!parsed.success) {
-          console.error("Invalid signup response:", parsed.error);
-          throw new Error("Invalid response structure");
-        }
-        return parsed.data;
-      },
+      rawResponseSchema: userSchema,
       invalidatesTags: [API_TAGS.AuthUser],
     }),
 
@@ -48,14 +34,7 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
-      transformResponse: (response: unknown): User => {
-        const parsed = userSchema.safeParse(response);
-        if (!parsed.success) {
-          console.error("Invalid signup response:", parsed.error);
-          throw new Error("Invalid response structure");
-        }
-        return parsed.data;
-      },
+      rawResponseSchema: userSchema,
       invalidatesTags: [API_TAGS.AuthUser],
     }),
 

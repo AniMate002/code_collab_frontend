@@ -1,7 +1,9 @@
-import { Link, styled } from "@mui/material";
+import { styled } from "@mui/material";
+import { NavLink } from "react-router";
 
-export const StyledNavigationLink = styled(Link)(({ theme }) => ({
+export const StyledNavigationLink = styled(NavLink)(({ theme }) => ({
   width: "100%",
+  color: theme.palette.primary.main,
   display: "flex",
   alignItems: "center",
   justifyContent: "start",

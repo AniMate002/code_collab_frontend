@@ -1,22 +1,32 @@
-import React from "react";
-import { AppRoutes } from "./router.tsx";
+import React, { useMemo } from "react";
 import { Route, Routes } from "react-router";
 import { RouterPaths } from "./paths.tsx";
 import LayoutTemplate from "../components/templates/Layout/Layout.template.tsx";
 
+import { AppRoutes } from "./router.tsx";
+
 const AppRouter: React.FC = () => {
+  const routesWithoutLayout = useMemo(
+    () =>
+      AppRoutes.filter((route) => route.skipLayout).map((route) => (
+        <Route key={route.path} path={route.path} element={<route.element />} />
+      )),
+    [AppRoutes],
+  );
+
+  const routesWithLayout = useMemo(
+    () =>
+      AppRoutes.filter((route) => !route.skipLayout).map((route) => (
+        <Route key={route.path} path={route.path} element={<route.element />} />
+      )),
+    [AppRoutes],
+  );
+
   return (
     <Routes>
-      {AppRoutes.map((route) => {
-        if (route.skipLayout)
-          return <Route path={route.path} element={<route.element />} />;
-      })}
-
+      {routesWithoutLayout}
       <Route path={RouterPaths.HOME} element={<LayoutTemplate />}>
-        {AppRoutes.map((route) => {
-          if (!route.skipLayout)
-            return <Route path={route.path} element={<route.element />} />;
-        })}
+        {routesWithLayout}
       </Route>
     </Routes>
   );

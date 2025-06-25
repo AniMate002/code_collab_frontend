@@ -15,6 +15,8 @@ export const userSchema = z.object({
   activities: z.array(z.string()),
   following: z.array(z.string()),
   followers: z.array(z.string()),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export type User = z.infer<typeof userSchema>;

@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
@@ -15,15 +14,13 @@ import { theme } from "./constants/theme.const.tsx";
 import AuthProvider from "./providers/auth.provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <Provider store={store}>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Provider store={store}>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </Provider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>
-  </StrictMode>,
+  </Provider>,
 );

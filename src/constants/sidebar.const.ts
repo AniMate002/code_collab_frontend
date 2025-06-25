@@ -12,7 +12,7 @@ export interface SidebarNavLink {
 
 export const sidebarNavLinks: SidebarNavLink[] = [
   {
-    href: RouterPaths.PROFILE,
+    href: RouterPaths.PROFILE("me"),
     label: "Profile",
     Icon: Profile,
   },

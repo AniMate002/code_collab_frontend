@@ -3,6 +3,7 @@ import GlobalStylesTemplate from "./components/templates/GlobalStyles/GlobalStyl
 import { CssBaseline } from "@mui/material";
 
 function App() {
+  console.log("App");
   return (
     <>
       <CssBaseline />

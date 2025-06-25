@@ -24,4 +24,11 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/Signup/Signup.page.tsx"),
     ),
   },
+  {
+    title: "Profile",
+    path: RouterPaths.PROFILE(":id"),
+    element: React.lazy(
+      () => import("../components/pages/Profile/Profile.page.tsx"),
+    ),
+  },
 ];

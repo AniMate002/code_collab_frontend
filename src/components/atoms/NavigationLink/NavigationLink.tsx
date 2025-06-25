@@ -14,7 +14,7 @@ const NavigationLink: React.FC<NavigationLink> = ({
   const theme = useTheme();
   return (
     <StyledNavigationLink
-      href={href}
+      to={href}
       sx={{
         backgroundColor: isActive
           ? theme.palette.secondary.main

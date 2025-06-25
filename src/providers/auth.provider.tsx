@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext } from "react";
 import { useGetMeQuery } from "../store/api/auth.api.ts";
 import type { User } from "../types/user.types.ts";
 
@@ -18,18 +18,19 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const { data: authUser, isLoading, isError, error } = useGetMeQuery();
-
-  useEffect(() => {
-    console.log(authUser);
-    if (authUser) setIsAuth(true);
-    else setIsAuth(false);
-  }, [authUser]);
+  const {
+    data: authUser,
+    isLoading,
+    isError,
+    error,
+  } = useGetMeQuery(undefined, {
+    refetchOnMountOrArgChange: false,
+    refetchOnFocus: false,
+  });
 
   return (
     <AuthContext.Provider
-      value={{ authUser, isLoading, isError, error, isAuth }}
+      value={{ authUser, isLoading, isError, error, isAuth: !!authUser }}
     >
       {children}
     </AuthContext.Provider>
