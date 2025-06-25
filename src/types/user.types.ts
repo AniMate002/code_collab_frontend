@@ -4,6 +4,7 @@ export const userSchema = z.object({
   _id: z.string(),
   name: z.string(),
   email: z.string(),
+  about: z.string(),
   avatar: z
     .string()
     .default(

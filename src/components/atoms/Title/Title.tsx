@@ -5,7 +5,11 @@ import { StyledTitle } from "./styles.tsx";
 interface TitleProps extends TypographyProps {}
 
 const Title: React.FC<TitleProps> = (props) => {
-  return <StyledTitle variant={"h3"}>{props.children}</StyledTitle>;
+  return (
+    <StyledTitle variant={"h3"} {...props}>
+      {props.children}
+    </StyledTitle>
+  );
 };
 
 export default Title;

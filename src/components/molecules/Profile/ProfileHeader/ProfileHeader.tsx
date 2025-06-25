@@ -1,8 +1,8 @@
 import React from "react";
-import type { User } from "../../../types/user.types.ts";
+import type { User } from "../../../../types/user.types.ts";
 import { ProfileHeaderWrapper } from "./styles.ts";
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
-import Button from "../../atoms/Button/Button.tsx";
+import Button from "../../../atoms/Button/Button.tsx";
 
 interface ProfileHeaderProps {
   user: User | undefined;

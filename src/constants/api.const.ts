@@ -4,6 +4,7 @@ export const BASE_API_URL = "http://localhost:3000/api";
 
 export const API_TAGS = {
   AuthUser: "AuthUser",
+  Users: "Users",
 } as const;
 
 export const responseMessageSchema = z.object({

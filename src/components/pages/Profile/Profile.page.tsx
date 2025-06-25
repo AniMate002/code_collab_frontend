@@ -7,8 +7,8 @@ import { RouterPaths } from "../../../router/paths.tsx";
 const ProfilePage: React.FC = () => {
   const { id } = useParams<{ id: string | "me" }>();
   const { isAuth, authUser } = useAuth();
-  if (!isAuth) return <Navigate to={RouterPaths.HOME} replace />;
-  const user = id === "me" ? authUser : undefined;
+  if (!isAuth || !authUser) return <Navigate to={RouterPaths.HOME} replace />;
+  const user = id === "me" ? authUser : authUser;
   return <ProfileTemplate user={user} />;
 };
 
