@@ -18,7 +18,11 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ user }) => {
   const theme = useTheme();
   return (
     <Box sx={{ marginTop: theme.spacing(3) }}>
-      <Tabs value={tabValue} onChange={(_, newValue) => setTabValue(newValue)}>
+      <Tabs
+        sx={{ marginBottom: theme.spacing(3) }}
+        value={tabValue}
+        onChange={(_, newValue) => setTabValue(newValue)}
+      >
         <Tab label="Overview" />
         <Tab label="Rooms" />
         <Tab label="Activity" />
@@ -27,7 +31,7 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ user }) => {
       </Tabs>
       <Box>
         {tabValue === 0 && <ProfileOverview user={user} />}
-        {tabValue === 1 && <ProfileRooms />}
+        {tabValue === 1 && <ProfileRooms user={user} />}
         {tabValue === 2 && <div>Activity</div>}
         {tabValue === 3 && (
           <ProfileUsers mode={ProfileUsersModes.FOLLOWERS} user={user} />

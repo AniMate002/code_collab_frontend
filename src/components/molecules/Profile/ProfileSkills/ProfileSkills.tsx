@@ -10,9 +10,11 @@ interface ProfileSkillsProps {
 
 const ProfileSkills: React.FC<ProfileSkillsProps> = ({ skills }) => {
   const theme = useTheme();
-  const renderedSkills = skills.map((skill) => <SkillItem skill={skill} />);
+  const renderedSkills = skills.map((skill) => (
+    <SkillItem key={skill} skill={skill} />
+  ));
   return (
-    <Box sx={{ marginTop: theme.spacing(3) }}>
+    <Box>
       <Title sx={{ marginBottom: theme.spacing(2) }}>Skills</Title>
       {!skills || skills.length === 0 ? (
         <Typography sx={{ color: theme.palette.text.secondary }}>

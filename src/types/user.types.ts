@@ -21,3 +21,10 @@ export const userSchema = z.object({
 });
 
 export type User = z.infer<typeof userSchema>;
+
+export const UserGridModes = {
+  COMPACT: "COMPACT",
+  FULL: "FULL",
+} as const;
+
+export type UserGridMode = (typeof UserGridModes)[keyof typeof UserGridModes];
