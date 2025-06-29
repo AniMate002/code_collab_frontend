@@ -2,16 +2,16 @@ import React from "react";
 import type { User } from "../../../types/user.types.ts";
 import { UserCardCompactWrapper } from "./styles.ts";
 import { Avatar, Skeleton, Typography, useTheme } from "@mui/material";
+import { RouterPaths } from "../../../router/paths.tsx";
 
 interface UserCardProps {
   user: User;
 }
 
-// TODO: make these cards LINKS
 export const UserCardCompact: React.FC<UserCardProps> = ({ user }) => {
   const theme = useTheme();
   return (
-    <UserCardCompactWrapper>
+    <UserCardCompactWrapper to={RouterPaths.PROFILE(user._id.toString())}>
       <Avatar src={user.avatar} alt={user.name} />
       <Typography
         sx={{

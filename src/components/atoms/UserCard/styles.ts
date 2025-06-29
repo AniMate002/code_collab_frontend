@@ -1,6 +1,7 @@
-import { Box, styled } from "@mui/material";
+import { styled } from "@mui/material";
+import { NavLink } from "react-router";
 
-export const UserCardCompactWrapper = styled(Box)(({ theme }) => ({
+export const UserCardCompactWrapper = styled(NavLink)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.secondary.main,
   padding: "10px 20px",
@@ -10,4 +11,6 @@ export const UserCardCompactWrapper = styled(Box)(({ theme }) => ({
   gap: theme.spacing(2),
   width: "220px",
   height: "65px",
+  color: theme.palette.text.primary,
+  textDecoration: "none",
 }));

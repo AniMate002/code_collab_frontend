@@ -7,6 +7,7 @@ import ProfileOverview from "./ProfileOverview.tsx";
 import type { User } from "../../../types/user.types.ts";
 import ProfileRooms from "./ProfileRooms.tsx";
 import ProfileUsers, { ProfileUsersModes } from "./ProfileUsers.tsx";
+import ProfileActivity from "./ProfileActivity.tsx";
 
 interface ProfileTabsProps {
   user: User;
@@ -32,7 +33,7 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ user }) => {
       <Box>
         {tabValue === 0 && <ProfileOverview user={user} />}
         {tabValue === 1 && <ProfileRooms user={user} />}
-        {tabValue === 2 && <div>Activity</div>}
+        {tabValue === 2 && <ProfileActivity user={user} />}
         {tabValue === 3 && (
           <ProfileUsers mode={ProfileUsersModes.FOLLOWERS} user={user} />
         )}
