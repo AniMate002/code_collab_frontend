@@ -11,9 +11,7 @@ export const SidebarWrapper = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  width: "320px",
+  width: "400px",
   height: "100vh",
-  // backgroundColor: "red",
-  // paddingTop: theme.spacing(8),
   paddingLeft: theme.spacing(4),
 }));

@@ -53,6 +53,18 @@ export const userApi = createApi({
       providesTags: [API_TAGS.Activities],
       rawResponseSchema: activitySchema.array(),
     }),
+    getFeaturedUsers: build.query<User[], void>({
+      query: () => "/featured",
+      providesTags: [API_TAGS.Users],
+      rawResponseSchema: userSchema.array(),
+      keepUnusedDataFor: 60,
+    }),
+    getUsersBySpecialization: build.query<User[], string>({
+      query: (specialization) => `/filter?specialization=${specialization}`,
+      providesTags: [API_TAGS.Users],
+      rawResponseSchema: userSchema.array(),
+      keepUnusedDataFor: 60,
+    }),
   }),
 });
 
@@ -63,4 +75,6 @@ export const {
   useGetUserByIdQuery,
   useFollowUserMutation,
   useGetUserActivityQuery,
+  useGetFeaturedUsersQuery,
+  useGetUsersBySpecializationQuery,
 } = userApi;

@@ -30,7 +30,7 @@ const NavigationLink: React.FC<NavigationLink> = ({
       <Typography
         sx={{
           fontWeight: theme.typography.fontWeightMedium,
-          fontSize: theme.typography.pxToRem(18),
+          fontSize: theme.typography.pxToRem(16),
         }}
       >
         {label}

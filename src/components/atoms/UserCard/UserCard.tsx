@@ -1,7 +1,13 @@
 import React from "react";
 import type { User } from "../../../types/user.types.ts";
-import { UserCardCompactWrapper } from "./styles.ts";
-import { Avatar, Skeleton, Typography, useTheme } from "@mui/material";
+import {
+  UserCardCompactWrapper,
+  UserCardFullAvatarWrapper,
+  UserCardFullSpecializationWrapper,
+  UserCardFullUsernameWrapper,
+  UserCardFullWrapper,
+} from "./styles.ts";
+import { Avatar, Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { RouterPaths } from "../../../router/paths.tsx";
 
 interface UserCardProps {
@@ -29,9 +35,34 @@ export const UserCardCompact: React.FC<UserCardProps> = ({ user }) => {
 };
 
 export const UserCardFull: React.FC<UserCardProps> = ({ user }) => {
-  return <div>{user.name}</div>;
+  return (
+    <UserCardFullWrapper to={RouterPaths.PROFILE(user._id.toString())}>
+      <UserCardFullAvatarWrapper src={user.avatar} alt={user.name} />
+      <UserCardFullUsernameWrapper>{user.name}</UserCardFullUsernameWrapper>
+      <UserCardFullSpecializationWrapper>
+        {user.specialization}
+      </UserCardFullSpecializationWrapper>
+    </UserCardFullWrapper>
+  );
 };
 
 export const UserCardCompactSkeleton: React.FC = () => {
   return <Skeleton variant="rounded" width={220} height={65} />;
+};
+
+export const UserCardFullSkeleton: React.FC = () => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      <Skeleton variant="circular" width={200} height={200} />
+      <Skeleton variant="text" width={100} />
+      <Skeleton variant="text" width={70} sx={{ fontSize: "12px" }} />
+    </Box>
+  );
 };

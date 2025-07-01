@@ -31,4 +31,11 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/Profile/Profile.page.tsx"),
     ),
   },
+  {
+    title: "ExplorePage",
+    path: RouterPaths.EXPLORE,
+    element: React.lazy(
+      () => import("../components/pages/Explore/Explore.page.tsx"),
+    ),
+  },
 ];

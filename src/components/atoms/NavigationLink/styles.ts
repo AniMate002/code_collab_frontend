@@ -9,7 +9,7 @@ export const StyledNavigationLink = styled(NavLink)(({ theme }) => ({
   justifyContent: "start",
   padding: "30px 16px",
   height: "40px",
-  borderRadius: 20,
+  borderRadius: 40,
   textDecoration: "none",
   gap: theme.spacing(2),
   fontWeight: theme.typography.fontWeightBold,

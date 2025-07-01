@@ -36,7 +36,7 @@ export const RoomCardSkeleton = () => {
       <Skeleton variant="rounded" width={250} height={250} />
       <Skeleton variant="rounded" width={50} height={20} />
       <Skeleton variant="text" width={150} height={20} />
-      <Skeleton variant="rounded" width={250} height={50} />
+      <Skeleton variant="rounded" width={250} height={60} />
     </RoomCardWrapper>
   );
 };

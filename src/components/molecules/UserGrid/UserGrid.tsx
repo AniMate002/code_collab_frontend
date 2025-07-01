@@ -9,7 +9,9 @@ import {
   UserCardCompact,
   UserCardCompactSkeleton,
   UserCardFull,
+  UserCardFullSkeleton,
 } from "../../atoms/UserCard/UserCard.tsx";
+import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
 
 interface UserGridProps {
   users: User[];
@@ -25,11 +27,18 @@ const UserGrid: React.FC<UserGridProps> = ({ users, isLoading, mode }) => {
       <UserCardFull user={user} key={user._id.toString()} />
     ),
   );
-  if (isLoading) return <UserGridSkeleton />;
+  if (isLoading)
+    return mode === UserGridModes.COMPACT ? (
+      <UserGridSkeletonCompact />
+    ) : (
+      <UserGridSkeletonFull />
+    );
+  if (!isLoading && users && users.length === 0)
+    return <SecondaryText>No users</SecondaryText>;
   return <UserGridWrapper>{renderedUserCards}</UserGridWrapper>;
 };
 
-const UserGridSkeleton = () => {
+const UserGridSkeletonCompact = () => {
   return (
     <UserGridWrapper>
       <UserCardCompactSkeleton />
@@ -37,6 +46,18 @@ const UserGridSkeleton = () => {
       <UserCardCompactSkeleton />
       <UserCardCompactSkeleton />
       <UserCardCompactSkeleton />
+    </UserGridWrapper>
+  );
+};
+
+const UserGridSkeletonFull = () => {
+  return (
+    <UserGridWrapper>
+      <UserCardFullSkeleton />
+      <UserCardFullSkeleton />
+      <UserCardFullSkeleton />
+      <UserCardFullSkeleton />
+      <UserCardFullSkeleton />
     </UserGridWrapper>
   );
 };

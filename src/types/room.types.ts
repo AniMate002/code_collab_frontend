@@ -42,13 +42,13 @@ export const roomSchema = z.object({
       "https://linda-hoang.com/wp-content/uploads/2014/10/img-placeholder-dark.jpg",
     ),
   topic: z.string(),
-  contributors: z.string().array(),
-  activities: z.string().array(),
+  contributors: z.string().array().optional(),
+  activities: z.string().array().optional(),
   type: z.string().nonempty(),
-  messages: messageSchema.array(),
-  links: linkSchema.array(),
-  tasks: taskSchema.array(),
-  files: fileSchema.array(),
+  messages: messageSchema.array().optional(),
+  links: linkSchema.array().optional(),
+  tasks: taskSchema.array().optional(),
+  files: fileSchema.array().optional(),
 });
 
 export type Room = z.infer<typeof roomSchema>;
