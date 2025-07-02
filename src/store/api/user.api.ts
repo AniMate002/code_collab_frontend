@@ -1,12 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_TAGS, BASE_API_URL } from "../../constants/api.const.ts";
-import { type User, userSchema } from "../../types/user.types.ts";
+import {
+  type UpdateUserFormData,
+  type User,
+  userSchema,
+} from "../../types/user.types.ts";
 import { type Room, roomSchema } from "../../types/room.types.ts";
 import { type Activity, activitySchema } from "../../types/activity.types.ts";
 
 export const userApi = createApi({
   reducerPath: "userApi",
   tagTypes: [
+    API_TAGS.AuthUser,
     API_TAGS.Users,
     API_TAGS.AuthUser,
     API_TAGS.Rooms,
@@ -65,6 +70,14 @@ export const userApi = createApi({
       rawResponseSchema: userSchema.array(),
       keepUnusedDataFor: 60,
     }),
+    updateUser: build.mutation<User, UpdateUserFormData>({
+      query: (userDto: UpdateUserFormData) => ({
+        url: `/${userDto._id}`,
+        method: "PUT",
+        body: userDto,
+      }),
+      invalidatesTags: [API_TAGS.AuthUser],
+    }),
   }),
 });
 
@@ -77,4 +90,5 @@ export const {
   useGetUserActivityQuery,
   useGetFeaturedUsersQuery,
   useGetUsersBySpecializationQuery,
+  useUpdateUserMutation,
 } = userApi;

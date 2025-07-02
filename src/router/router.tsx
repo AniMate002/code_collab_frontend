@@ -27,6 +27,7 @@ export const AppRoutes: RouterType[] = [
   {
     title: "Profile",
     path: RouterPaths.PROFILE(":id"),
+    requireAuth: true,
     element: React.lazy(
       () => import("../components/pages/Profile/Profile.page.tsx"),
     ),
@@ -36,6 +37,14 @@ export const AppRoutes: RouterType[] = [
     path: RouterPaths.EXPLORE,
     element: React.lazy(
       () => import("../components/pages/Explore/Explore.page.tsx"),
+    ),
+  },
+  {
+    title: "Update Profile",
+    path: RouterPaths.EDIT_MY_PROFILE,
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/Profile/UpdateProfile.page.tsx"),
     ),
   },
 ];

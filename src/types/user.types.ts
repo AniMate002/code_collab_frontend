@@ -28,3 +28,15 @@ export const UserGridModes = {
 } as const;
 
 export type UserGridMode = (typeof UserGridModes)[keyof typeof UserGridModes];
+
+export const updateUserFormSchema = z.object({
+  _id: z.string().nonempty(),
+  name: z.string().nonempty(),
+  email: z.string().email(),
+  skills: z.string().array(),
+  about: z.string().nonempty(),
+  specialization: z.string().nonempty(),
+  avatar: z.string().nonempty(),
+});
+
+export type UpdateUserFormData = z.infer<typeof updateUserFormSchema>;

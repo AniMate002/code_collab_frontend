@@ -5,4 +5,5 @@ export type RouterType = {
   path: string;
   element: LazyExoticComponent<ComponentType<any>>;
   skipLayout?: boolean;
+  requireAuth?: boolean;
 };
