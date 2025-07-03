@@ -10,3 +10,9 @@ export const RoomTopics = {
 } as const;
 
 export type RoomTopic = (typeof RoomTopics)[keyof typeof RoomTopics];
+
+export const RoomTypes = {
+  PUBLIC: "public",
+  PRIVATE: "private",
+};
+export type RoomType = (typeof RoomTypes)[keyof typeof RoomTypes];

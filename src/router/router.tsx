@@ -47,4 +47,12 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/Profile/UpdateProfile.page.tsx"),
     ),
   },
+  {
+    title: "Create room",
+    path: RouterPaths.CREATE_ROOM,
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/CreateRoom/CreateRoom.page.tsx"),
+    ),
+  },
 ];

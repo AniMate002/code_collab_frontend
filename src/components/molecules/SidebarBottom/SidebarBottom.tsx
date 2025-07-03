@@ -6,10 +6,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useLogoutMutation } from "../../../store/api/auth.api.ts";
 import { Toast } from "../../atoms/Toast/Toast.ts";
 import { useAuth } from "../../../providers/auth.provider.tsx";
+import { useNavigate } from "react-router";
+import { RouterPaths } from "../../../router/paths.tsx";
 
 const SidebarBottom: React.FC = () => {
   const { isAuth } = useAuth();
   const [logout, { isLoading }] = useLogoutMutation();
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await logout().unwrap();
@@ -26,7 +29,10 @@ const SidebarBottom: React.FC = () => {
   };
   return (
     <>
-      <Button sx={{ marginTop: "auto", marginBottom: "10px" }}>
+      <Button
+        onClick={() => navigate(RouterPaths.CREATE_ROOM)}
+        sx={{ marginTop: "auto", marginBottom: "10px" }}
+      >
         <span>Create Room</span>
         <AddIcon sx={{ fontSize: "20px" }} />
       </Button>

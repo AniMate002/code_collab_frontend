@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { userSchema } from "./user.types.ts";
+import { RoomTypes } from "../constants/room.const.ts";
 
 export const linkSchema = z.object({
   _id: z.string().nonempty(),
@@ -52,3 +53,13 @@ export const roomSchema = z.object({
 });
 
 export type Room = z.infer<typeof roomSchema>;
+
+export const createRoomSchema = z.object({
+  title: z.string().nonempty(),
+  topic: z.string().nonempty(),
+  description: z.string().nonempty(),
+  type: z.enum([RoomTypes.PRIVATE, RoomTypes.PUBLIC]),
+  image: z.string().optional(),
+});
+
+export type CreateRoomFormData = z.infer<typeof createRoomSchema>;
