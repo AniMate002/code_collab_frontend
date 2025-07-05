@@ -55,4 +55,9 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/CreateRoom/CreateRoom.page.tsx"),
     ),
   },
+  {
+    title: "Room",
+    path: RouterPaths.ROOM(":id"),
+    element: React.lazy(() => import("../components/pages/Room/Room.page.tsx")),
+  },
 ];

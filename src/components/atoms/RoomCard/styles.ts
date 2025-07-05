@@ -6,6 +6,7 @@ export const RoomCardWrapper = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(1),
   height: "360px",
+  cursor: "pointer",
 }));
 
 export const RoomImageWrapper = styled(Box)(({ theme }) => ({

@@ -24,6 +24,7 @@ const ExploreUserSpecializationSelectors: React.FC<
     Object.keys(UserSpecializations) as Array<keyof typeof UserSpecializations>
   ).map((specialization) => (
     <RoomTopicSelectorWrapper
+      key={specialization}
       onClick={() =>
         setSelectedSpecializations(UserSpecializations[specialization])
       }

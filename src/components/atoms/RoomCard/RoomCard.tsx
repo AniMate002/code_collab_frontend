@@ -8,16 +8,19 @@ import {
   RoomTopicWrapper,
 } from "./styles.ts";
 import { Skeleton } from "@mui/material";
+import { useNavigate } from "react-router";
+import { RouterPaths } from "../../../router/paths.tsx";
 
 interface RoomCardProps {
   room: Room;
 }
 
-// TODO: make these cards LINKS
-
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
+  const navigate = useNavigate();
   return (
-    <RoomCardWrapper>
+    <RoomCardWrapper
+      onClick={() => navigate(RouterPaths.ROOM(room._id.toString()))}
+    >
       <RoomImageWrapper>
         <img src={room.image} alt={room.title} />
       </RoomImageWrapper>
