@@ -3,6 +3,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import Profile from "@mui/icons-material/Person";
 import { RouterPaths } from "../router/paths.tsx";
 import ExploreIcon from "@mui/icons-material/Explore";
+import PeopleIcon from "@mui/icons-material/People";
+import TagIcon from "@mui/icons-material/Tag";
 
 export interface SidebarNavLink {
   href: string;
@@ -26,5 +28,15 @@ export const sidebarNavLinks: SidebarNavLink[] = [
     href: RouterPaths.EXPLORE,
     label: "Explore",
     Icon: ExploreIcon,
+  },
+  {
+    href: RouterPaths.FOLLOWING,
+    label: "Following",
+    Icon: PeopleIcon,
+  },
+  {
+    href: RouterPaths.MY_ROOMS,
+    label: "My Rooms",
+    Icon: TagIcon,
   },
 ];

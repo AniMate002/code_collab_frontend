@@ -60,4 +60,20 @@ export const AppRoutes: RouterType[] = [
     path: RouterPaths.ROOM(":id"),
     element: React.lazy(() => import("../components/pages/Room/Room.page.tsx")),
   },
+  {
+    title: "Following",
+    path: RouterPaths.FOLLOWING,
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/Following/Following.page.tsx"),
+    ),
+  },
+  {
+    title: "My Rooms",
+    path: RouterPaths.MY_ROOMS,
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/MyRooms/MyRooms.page.tsx"),
+    ),
+  },
 ];

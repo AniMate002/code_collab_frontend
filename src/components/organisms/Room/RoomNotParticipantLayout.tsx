@@ -11,13 +11,14 @@ import {
   useJoinRoomMutation,
 } from "../../../store/api/room.api.ts";
 import { Avatar, AvatarGroup, Box, Skeleton, useTheme } from "@mui/material";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { RouterPaths } from "../../../router/paths.tsx";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockOutlineIcon from "@mui/icons-material/LockOutline";
 import { RoomTypes } from "../../../constants/room.const.ts";
 import Button from "../../atoms/Button/Button.tsx";
 import { Toast } from "../../atoms/Toast/Toast.ts";
+import { useAuth } from "../../../providers/auth.provider.tsx";
 
 interface RoomNotParticipantLayoutProps {
   room: Room;
@@ -26,12 +27,15 @@ interface RoomNotParticipantLayoutProps {
 const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
   room,
 }) => {
+  const { isAuth } = useAuth();
   const theme = useTheme();
+  const navigate = useNavigate();
   const [joinRoom, { isLoading: isLoadingJoinRoom }] = useJoinRoomMutation();
   const { data: contributors, isLoading } = useGetRoomContributorsQuery(
     room._id.toString(),
   );
   const handleJoinRoom = async () => {
+    if (!isAuth) return navigate(RouterPaths.LOGIN);
     try {
       if (room.type === RoomTypes.PRIVATE) {
         //   TODO: ADD sendRequest LOGIC AFTER ADDING NOTIFICATIONS

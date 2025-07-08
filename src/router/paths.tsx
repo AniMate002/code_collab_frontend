@@ -6,6 +6,7 @@ export class RouterPaths {
   static EXPLORE = "/explore";
   static CREATE_ROOM = "/create-room";
   static MY_ROOMS = "/my-rooms";
+  static FOLLOWING = "/following";
 
   static ROOM(id: string | number) {
     return `/room/${id}`;
