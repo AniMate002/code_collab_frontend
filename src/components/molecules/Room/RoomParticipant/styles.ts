@@ -33,7 +33,7 @@ export const RoomParticipantHeaderLeaveDescriptionWrapper = styled(
 
 export const RoomParticipantSendMessageFormWrapper = styled("form")(
   ({ theme }) => ({
-    bottom: theme.spacing(-28),
+    bottom: theme.spacing(-29),
     position: "absolute",
     left: 0,
     display: "flex",

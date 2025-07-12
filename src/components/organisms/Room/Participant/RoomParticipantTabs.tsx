@@ -3,6 +3,7 @@ import { Box, useTheme } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import RoomChat from "./Tabs/RoomChat.tsx";
+import RoomFiles from "./Tabs/RoomFiles.tsx";
 
 interface RoomParticipantTabsProps {
   roomId: string;
@@ -25,13 +26,16 @@ const RoomParticipantTabs: React.FC<RoomParticipantTabsProps> = ({
         onChange={(_, newValue) => setTabValue(newValue)}
       >
         <Tab label="Chat" />
-        <Tab label="Files" />
+        <Tab label="Images" />
         <Tab label="Links" />
         <Tab label="Activity" />
         <Tab label="Contributors" />
         <Tab label="Tasks" />
       </Tabs>
-      <Box>{tabValue === 0 && <RoomChat roomId={roomId} />}</Box>
+      <Box>
+        {tabValue === 0 && <RoomChat roomId={roomId} />}
+        {tabValue === 1 && <RoomFiles roomId={roomId} />}
+      </Box>
     </Box>
   );
 };

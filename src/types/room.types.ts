@@ -10,9 +10,10 @@ export const linkSchema = z.object({
 
 export const fileSchema = z.object({
   _id: z.string().nonempty(),
-  name: z.string().nonempty(),
+  sender: userSchema.partial(),
   link: z.string().nonempty(),
 });
+export type File = z.infer<typeof fileSchema>;
 
 export const messageSchema = z.object({
   _id: z.string().nonempty(),

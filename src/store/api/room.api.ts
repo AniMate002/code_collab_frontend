@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_TAGS, BASE_API_URL } from "../../constants/api.const.ts";
 import {
   type CreateRoomFormData,
+  type File,
+  fileSchema,
   type Message,
   messageSchema,
   type Room,
@@ -17,6 +19,7 @@ export const roomApi = createApi({
     API_TAGS.AuthUser,
     API_TAGS.Contributors,
     API_TAGS.Messages,
+    API_TAGS.Files,
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
@@ -73,6 +76,19 @@ export const roomApi = createApi({
       }),
       invalidatesTags: [API_TAGS.Messages],
     }),
+    getRoomFiles: build.query<File[], string>({
+      query: (roomId) => `/${roomId}/file`,
+      providesTags: [API_TAGS.Files],
+      rawResponseSchema: fileSchema.array(),
+    }),
+    sendRoomFile: build.mutation<File, { roomId: string; file: string }>({
+      query: (payload) => ({
+        url: `/${payload.roomId}/file`,
+        method: "POST",
+        body: { file: payload.file },
+      }),
+      invalidatesTags: [API_TAGS.Files],
+    }),
   }),
 });
 
@@ -85,4 +101,6 @@ export const {
   useJoinRoomMutation,
   useGetRoomMessagesQuery,
   useSendMessageMutation,
+  useGetRoomFilesQuery,
+  useSendRoomFileMutation,
 } = roomApi;

@@ -15,7 +15,9 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isMe }) => {
     <MessageItemWrapper sx={{ flexDirection: isMe ? "row-reverse" : "row" }}>
       <Avatar src={message.sender.avatar} />
       <Box>
-        <SecondaryText sx={{ fontSize: "12px" }}>
+        <SecondaryText
+          sx={{ fontSize: "12px", textAlign: isMe ? "right" : "left" }}
+        >
           {message.sender.name}
         </SecondaryText>
         <MessageBodyWrapper
