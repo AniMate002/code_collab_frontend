@@ -2,23 +2,23 @@ import React from "react";
 import {
   RoomNotParticipantHeaderWrapper,
   RoomNotParticipantLayoutWrapper,
-} from "./styles.ts";
-import type { Room } from "../../../types/room.types.ts";
-import Title from "../../atoms/Title/Title.tsx";
-import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
+} from "../styles.ts";
+import type { Room } from "../../../../types/room.types.ts";
+import Title from "../../../atoms/Title/Title.tsx";
+import SecondaryText from "../../../atoms/SecondaryText/SecondaryText.tsx";
 import {
   useGetRoomContributorsQuery,
   useJoinRoomMutation,
-} from "../../../store/api/room.api.ts";
+} from "../../../../store/api/room.api.ts";
 import { Avatar, AvatarGroup, Box, Skeleton, useTheme } from "@mui/material";
 import { NavLink, useNavigate } from "react-router";
-import { RouterPaths } from "../../../router/paths.tsx";
+import { RouterPaths } from "../../../../router/paths.tsx";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockOutlineIcon from "@mui/icons-material/LockOutline";
-import { RoomTypes } from "../../../constants/room.const.ts";
-import Button from "../../atoms/Button/Button.tsx";
-import { Toast } from "../../atoms/Toast/Toast.ts";
-import { useAuth } from "../../../providers/auth.provider.tsx";
+import { RoomTypes } from "../../../../constants/room.const.ts";
+import Button from "../../../atoms/Button/Button.tsx";
+import { Toast } from "../../../atoms/Toast/Toast.ts";
+import { useAuth } from "../../../../providers/auth.provider.tsx";
 
 interface RoomNotParticipantLayoutProps {
   room: Room;
@@ -78,7 +78,13 @@ const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
           <LockOpenIcon sx={{ color: theme.palette.text.secondary }} />
         )}
       </Box>
-      <SecondaryText sx={{ marginBottom: theme.spacing(2) }}>
+      <SecondaryText
+        sx={{
+          marginBottom: theme.spacing(2),
+          textAlign: "center",
+          width: "70%",
+        }}
+      >
         {room.description}
       </SecondaryText>
       {isLoading ? (

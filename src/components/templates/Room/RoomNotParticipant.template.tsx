@@ -1,5 +1,5 @@
 import React from "react";
-import RoomNotParticipantLayout from "../../organisms/Room/RoomNotParticipantLayout.tsx";
+import RoomNotParticipantLayout from "../../organisms/Room/NotParticipant/RoomNotParticipantLayout.tsx";
 import type { Room } from "../../../types/room.types.ts";
 
 interface RoomNotParticipantTemplateProps {

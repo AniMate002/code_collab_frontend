@@ -7,7 +7,7 @@ export const SidebarWrapper = styled(Box)(({ theme }) => ({
   top: 0,
   display: "flex",
   paddingTop: theme.spacing(20),
-  paddingBottom: theme.spacing(10),
+  paddingBottom: theme.spacing(4),
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",

@@ -7,7 +7,7 @@ import {
 } from "../../../../constants/room.const.ts";
 import ExploreRoomsTopicSelectors from "./ExploreRoomsTopicSelectors.tsx";
 import { useGetRoomsByTopicQuery } from "../../../../store/api/room.api.ts";
-import RoomGrid from "../../RoomGrid/RoomGrid.tsx";
+import RoomGrid from "../../Room/RoomGrid/RoomGrid.tsx";
 
 const ExploreRoomTopics: React.FC = () => {
   const theme = useTheme();

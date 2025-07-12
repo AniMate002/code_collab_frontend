@@ -16,11 +16,13 @@ export const fileSchema = z.object({
 
 export const messageSchema = z.object({
   _id: z.string().nonempty(),
-  sender: z.string().nonempty(),
+  sender: userSchema.partial(),
   body: z.string().nonempty(),
   createdAt: z.string().nonempty(),
   updatedAt: z.string().nonempty(),
 });
+
+export type Message = z.infer<typeof messageSchema>;
 
 export const taskSchema = z.object({
   _id: z.string().nonempty(),

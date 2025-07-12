@@ -4,6 +4,9 @@ import { Navigate, useParams } from "react-router";
 import { RouterPaths } from "../../../router/paths.tsx";
 import { useAuth } from "../../../providers/auth.provider.tsx";
 import RoomNotParticipantTemplate from "../../templates/Room/RoomNotParticipant.template.tsx";
+import RoomParticipantTemplate, {
+  RoomParticipantTemplateSkeleton,
+} from "../../templates/Room/RoomParticipant.template.tsx";
 
 const RoomPage: React.FC = () => {
   const { authUser, isAuth } = useAuth();
@@ -13,6 +16,8 @@ const RoomPage: React.FC = () => {
   if (isLoading) return <div>Loading...</div>;
   if (!room) return <Navigate to={RouterPaths.HOME} />;
 
+  if (isLoading) return <RoomParticipantTemplateSkeleton />;
+
   const isParticipating = isAuth
     ? room.contributors?.some(
         (contributor) => contributor.toString() === authUser?._id.toString(),
@@ -21,7 +26,7 @@ const RoomPage: React.FC = () => {
   return !isParticipating ? (
     <RoomNotParticipantTemplate room={room} />
   ) : (
-    <div>Participating</div>
+    <RoomParticipantTemplate room={room} />
   );
 };
 

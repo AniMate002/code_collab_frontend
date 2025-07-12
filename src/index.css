@@ -1,3 +1,8 @@
 .swal2-timer-progress-bar {
     background-color: #DBE8F2 !important;
 }
+
+
+::-webkit-scrollbar {
+    display: none;
+}

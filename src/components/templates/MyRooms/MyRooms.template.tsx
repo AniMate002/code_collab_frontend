@@ -3,7 +3,7 @@ import Searchbar from "../../molecules/Explore/Searchbar.tsx";
 import Title from "../../atoms/Title/Title.tsx";
 import { useTheme } from "@mui/material";
 import type { Room } from "../../../types/room.types.ts";
-import RoomGrid from "../../molecules/RoomGrid/RoomGrid.tsx";
+import RoomGrid from "../../molecules/Room/RoomGrid/RoomGrid.tsx";
 
 interface MyRoomsPageProps {
   rooms: Room[];

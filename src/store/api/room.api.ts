@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_TAGS, BASE_API_URL } from "../../constants/api.const.ts";
 import {
   type CreateRoomFormData,
+  type Message,
+  messageSchema,
   type Room,
   roomSchema,
 } from "../../types/room.types.ts";
@@ -9,7 +11,13 @@ import { type User, userSchema } from "../../types/user.types.ts";
 
 export const roomApi = createApi({
   reducerPath: "roomApi",
-  tagTypes: [API_TAGS.Rooms, API_TAGS.Contributors, API_TAGS.AuthUser],
+  tagTypes: [
+    API_TAGS.Rooms,
+    API_TAGS.Contributors,
+    API_TAGS.AuthUser,
+    API_TAGS.Contributors,
+    API_TAGS.Messages,
+  ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
     credentials: "include",
@@ -46,7 +54,24 @@ export const roomApi = createApi({
         url: `/${roomId}/join`,
         method: "POST",
       }),
-      invalidatesTags: [API_TAGS.Rooms, API_TAGS.AuthUser],
+      invalidatesTags: [
+        API_TAGS.Rooms,
+        API_TAGS.AuthUser,
+        API_TAGS.Contributors,
+      ],
+    }),
+    getRoomMessages: build.query<Message[], string>({
+      query: (roomId) => `/${roomId}/message`,
+      providesTags: [API_TAGS.Messages],
+      rawResponseSchema: messageSchema.array(),
+    }),
+    sendMessage: build.mutation<void, { roomId: string; body: string }>({
+      query: (payload) => ({
+        url: `/${payload.roomId}/message`,
+        method: "POST",
+        body: { body: payload.body },
+      }),
+      invalidatesTags: [API_TAGS.Messages],
     }),
   }),
 });
@@ -58,4 +83,6 @@ export const {
   useGetRoomByIdQuery,
   useGetRoomContributorsQuery,
   useJoinRoomMutation,
+  useGetRoomMessagesQuery,
+  useSendMessageMutation,
 } = roomApi;

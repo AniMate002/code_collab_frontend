@@ -26,19 +26,19 @@ export const userApi = createApi({
       query: (userId) => `/${userId}/followers`,
       providesTags: [API_TAGS.Users],
       keepUnusedDataFor: 60,
-      rawResponseSchema: userSchema.array(),
+      rawResponseSchema: userSchema.partial().array(),
     }),
     getUserFollowing: build.query<User[], string>({
       query: (userId) => `/${userId}/following`,
       providesTags: [API_TAGS.Users],
       keepUnusedDataFor: 60,
-      rawResponseSchema: userSchema.array(),
+      rawResponseSchema: userSchema.partial().array(),
     }),
     getUserRooms: build.query<Room[], string>({
       query: (userId) => `/${userId}/rooms`,
       providesTags: [API_TAGS.Rooms],
       keepUnusedDataFor: 60,
-      rawResponseSchema: roomSchema.array(),
+      rawResponseSchema: roomSchema.partial().array(),
     }),
     getUserById: build.query<User, string>({
       query: (userId) => `/${userId}`,

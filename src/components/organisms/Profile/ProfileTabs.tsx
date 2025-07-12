@@ -20,7 +20,11 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ user }) => {
   return (
     <Box sx={{ marginTop: theme.spacing(3) }}>
       <Tabs
-        sx={{ marginBottom: theme.spacing(3) }}
+        sx={{
+          marginBottom: theme.spacing(3),
+          borderBottom: "1px solid",
+          borderColor: theme.palette.divider,
+        }}
         value={tabValue}
         onChange={(_, newValue) => setTabValue(newValue)}
       >

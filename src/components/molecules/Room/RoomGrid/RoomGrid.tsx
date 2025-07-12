@@ -1,8 +1,10 @@
 import React from "react";
-import type { Room } from "../../../types/room.types.ts";
-import RoomCard, { RoomCardSkeleton } from "../../atoms/RoomCard/RoomCard.tsx";
+import type { Room } from "../../../../types/room.types.ts";
+import RoomCard, {
+  RoomCardSkeleton,
+} from "../../../atoms/RoomCard/RoomCard.tsx";
 import { RoomGridWrapper } from "./styles.ts";
-import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
+import SecondaryText from "../../../atoms/SecondaryText/SecondaryText.tsx";
 
 interface RoomGridProps {
   rooms: Room[];

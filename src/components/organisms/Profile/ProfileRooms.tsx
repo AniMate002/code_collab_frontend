@@ -1,7 +1,7 @@
 import React from "react";
 import type { User } from "../../../types/user.types.ts";
 import { useGetUserRoomsQuery } from "../../../store/api/user.api.ts";
-import RoomGrid from "../../molecules/RoomGrid/RoomGrid.tsx";
+import RoomGrid from "../../molecules/Room/RoomGrid/RoomGrid.tsx";
 import Title from "../../atoms/Title/Title.tsx";
 import { useTheme } from "@mui/material";
 
