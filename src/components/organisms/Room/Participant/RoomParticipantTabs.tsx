@@ -4,6 +4,8 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import RoomChat from "./Tabs/RoomChat.tsx";
 import RoomFiles from "./Tabs/RoomFiles.tsx";
+import RoomLinks from "./Tabs/RoomLinks.tsx";
+import RoomContributors from "./Tabs/RoomContributors.tsx";
 
 interface RoomParticipantTabsProps {
   roomId: string;
@@ -35,6 +37,10 @@ const RoomParticipantTabs: React.FC<RoomParticipantTabsProps> = ({
       <Box>
         {tabValue === 0 && <RoomChat roomId={roomId} />}
         {tabValue === 1 && <RoomFiles roomId={roomId} />}
+        {tabValue === 2 && <RoomLinks roomId={roomId} />}
+        {tabValue === 3 && <div>Activity</div>}
+        {tabValue === 4 && <RoomContributors roomId={roomId} />}
+        {tabValue === 5 && <div>Tasks</div>}
       </Box>
     </Box>
   );

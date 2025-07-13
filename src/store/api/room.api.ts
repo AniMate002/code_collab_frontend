@@ -4,6 +4,8 @@ import {
   type CreateRoomFormData,
   type File,
   fileSchema,
+  type Link,
+  linkSchema,
   type Message,
   messageSchema,
   type Room,
@@ -20,6 +22,7 @@ export const roomApi = createApi({
     API_TAGS.Contributors,
     API_TAGS.Messages,
     API_TAGS.Files,
+    API_TAGS.Links,
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
@@ -89,6 +92,22 @@ export const roomApi = createApi({
       }),
       invalidatesTags: [API_TAGS.Files],
     }),
+    getRoomLinks: build.query<Link[], string>({
+      query: (roomId) => `/${roomId}/link`,
+      providesTags: [API_TAGS.Links],
+      rawResponseSchema: linkSchema.array(),
+    }),
+    createRoomLink: build.mutation<
+      Link,
+      { roomId: string; link: string; name: string }
+    >({
+      query: (payload) => ({
+        url: `/${payload.roomId}/link`,
+        method: "POST",
+        body: { link: payload.link, name: payload.name },
+      }),
+      invalidatesTags: [API_TAGS.Links],
+    }),
   }),
 });
 
@@ -103,4 +122,6 @@ export const {
   useSendMessageMutation,
   useGetRoomFilesQuery,
   useSendRoomFileMutation,
+  useGetRoomLinksQuery,
+  useCreateRoomLinkMutation,
 } = roomApi;

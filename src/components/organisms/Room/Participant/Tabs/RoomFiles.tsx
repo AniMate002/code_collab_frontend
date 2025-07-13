@@ -37,15 +37,13 @@ const RoomFiles: React.FC<RoomFilesProps> = ({ roomId }) => {
   return (
     <>
       <TabHeader title="Files" showButton={false} />
-      {files && files.length !== 0 && (
-        <RoomFilesUploadSection
-          file={file}
-          setFile={setFile}
-          handleSendFile={handleSendFile}
-          isLoading={isLoadingSendFile}
-          roomId={roomId}
-        />
-      )}
+      <RoomFilesUploadSection
+        file={file}
+        setFile={setFile}
+        handleSendFile={handleSendFile}
+        isLoading={isLoadingSendFile}
+        roomId={roomId}
+      />
       {files && files.length > 0 && <RoomFilesImageGrid files={files} />}
     </>
   );

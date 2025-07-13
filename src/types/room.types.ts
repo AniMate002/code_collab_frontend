@@ -7,6 +7,7 @@ export const linkSchema = z.object({
   name: z.string().nonempty(),
   link: z.string().nonempty(),
 });
+export type Link = z.infer<typeof linkSchema>;
 
 export const fileSchema = z.object({
   _id: z.string().nonempty(),
@@ -66,3 +67,15 @@ export const createRoomSchema = z.object({
 });
 
 export type CreateRoomFormData = z.infer<typeof createRoomSchema>;
+
+export const createLinkFormSchema = z.object({
+  name: z.string().nonempty(),
+  link: z
+    .string()
+    .nonempty({ message: "Link is required" })
+    .regex(/^https:\/\/(?:[\w-]+\.)+[a-z]{2,}(?:\/\S*)?$/i, {
+      message: "Invalid HTTPS URL format",
+    }),
+});
+
+export type CreateLinkFormData = z.infer<typeof createLinkFormSchema>;
