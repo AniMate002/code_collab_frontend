@@ -16,3 +16,11 @@ export const RoomTypes = {
   PRIVATE: "private",
 };
 export type RoomType = (typeof RoomTypes)[keyof typeof RoomTypes];
+
+export const TaskStatuses = {
+  NOT_STARTED: "not started",
+  IN_PROGRESS: "in progress",
+  FINISHED: "finished",
+} as const;
+
+export type TaskStatus = (typeof TaskStatuses)[keyof typeof TaskStatuses];

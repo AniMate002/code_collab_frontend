@@ -30,12 +30,13 @@ export const taskSchema = z.object({
   _id: z.string().nonempty(),
   title: z.string().nonempty(),
   description: z.string().nonempty(),
-  assignedTo: userSchema,
+  assignedTo: userSchema.partial(),
   deadline: z.string().optional(),
   status: z
     .enum(["not started", "in progress", "finished"])
     .default("not started"),
 });
+export type Task = z.infer<typeof taskSchema>;
 
 export const roomSchema = z.object({
   _id: z.string().nonempty(),
@@ -79,3 +80,14 @@ export const createLinkFormSchema = z.object({
 });
 
 export type CreateLinkFormData = z.infer<typeof createLinkFormSchema>;
+
+export const createTaskFormSchema = z.object({
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  deadline: z.date().optional(),
+  assignedTo: z
+    .string({ message: "Assignee is required" })
+    .nonempty({ message: "Assignee is required" }),
+});
+
+export type CreateTaskFormData = z.infer<typeof createTaskFormSchema>;

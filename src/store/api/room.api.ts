@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_TAGS, BASE_API_URL } from "../../constants/api.const.ts";
 import {
   type CreateRoomFormData,
+  type CreateTaskFormData,
   type File,
   fileSchema,
   type Link,
@@ -10,6 +11,8 @@ import {
   messageSchema,
   type Room,
   roomSchema,
+  type Task,
+  taskSchema,
 } from "../../types/room.types.ts";
 import { type User, userSchema } from "../../types/user.types.ts";
 
@@ -23,6 +26,7 @@ export const roomApi = createApi({
     API_TAGS.Messages,
     API_TAGS.Files,
     API_TAGS.Links,
+    API_TAGS.Tasks,
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
@@ -108,6 +112,33 @@ export const roomApi = createApi({
       }),
       invalidatesTags: [API_TAGS.Links],
     }),
+    getRoomTasks: build.query<Task[], string>({
+      query: (roomId) => `/${roomId}/task`,
+      providesTags: [API_TAGS.Tasks],
+      rawResponseSchema: taskSchema.array(),
+    }),
+    changeRoomTaskStatus: build.mutation<
+      Task,
+      { roomId: string; taskId: string; status: string }
+    >({
+      query: (payload) => ({
+        url: `/${payload.roomId}/task`,
+        method: "PATCH",
+        body: { status: payload.status, taskId: payload.taskId },
+      }),
+      invalidatesTags: [API_TAGS.Tasks],
+    }),
+    createRoomTask: build.mutation<
+      Task,
+      CreateTaskFormData & { roomId: string }
+    >({
+      query: (payload) => ({
+        url: `/${payload.roomId}/task`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: [API_TAGS.Tasks],
+    }),
   }),
 });
 
@@ -124,4 +155,7 @@ export const {
   useSendRoomFileMutation,
   useGetRoomLinksQuery,
   useCreateRoomLinkMutation,
+  useGetRoomTasksQuery,
+  useChangeRoomTaskStatusMutation,
+  useCreateRoomTaskMutation,
 } = roomApi;

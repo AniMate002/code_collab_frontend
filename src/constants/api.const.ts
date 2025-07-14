@@ -11,6 +11,7 @@ export const API_TAGS = {
   Files: "Files",
   Contributors: "Contributors",
   Messages: "Messages",
+  Tasks: "Tasks",
 } as const;
 
 export const responseMessageSchema = z.object({

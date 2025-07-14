@@ -36,6 +36,7 @@ const RoomLinks: React.FC<RoomLinksProps> = ({ roomId }) => {
   };
 
   if (isLoading) return <RoomLinksSkeleton />;
+  // TODO: Place this logic inside tables and grid because you cant see header and create new
   if ((!isLoading && !links) || links?.length === 0)
     return <SecondaryText>No links</SecondaryText>;
   return (

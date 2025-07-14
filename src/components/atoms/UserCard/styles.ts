@@ -1,4 +1,4 @@
-import { Avatar, styled, Typography } from "@mui/material";
+import { Avatar, Box, styled, Typography } from "@mui/material";
 import { NavLink } from "react-router";
 
 export const UserCardCompactWrapper = styled(NavLink)(({ theme }) => ({
@@ -50,3 +50,13 @@ export const UserCardFullSpecializationWrapper = styled(Typography)(
     fontSize: "12px",
   }),
 );
+
+export const UserSelectItemWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: theme.spacing(1),
+  width: "70px",
+  cursor: "pointer",
+}));
