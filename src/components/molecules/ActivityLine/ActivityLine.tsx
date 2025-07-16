@@ -5,15 +5,18 @@ import Timeline from "@mui/lab/Timeline";
 import { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent";
 import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
 import { useTheme } from "@mui/material";
+import type { ActivityLineMode } from "../../../constants/activity.const.ts";
 
 interface ActivityLineProps {
   activities: Activity[];
   isLoading: boolean;
+  mode: ActivityLineMode;
 }
 
 const ActivityLine: React.FC<ActivityLineProps> = ({
   activities,
   isLoading,
+  mode,
 }) => {
   const theme = useTheme();
   const renderedActivities = [...activities]
@@ -23,6 +26,7 @@ const ActivityLine: React.FC<ActivityLineProps> = ({
         key={activity._id.toString()}
         activity={activity}
         isLast={key === array.length - 1}
+        mode={mode}
       />
     ));
   if (isLoading) return <div>Loading</div>;

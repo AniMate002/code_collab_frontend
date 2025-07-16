@@ -8,6 +8,8 @@ import {
 import { useDraggable } from "@dnd-kit/core";
 import { Avatar, Typography } from "@mui/material";
 import SecondaryText from "../SecondaryText/SecondaryText.tsx";
+import { formatDistanceToNow } from "date-fns";
+import { theme } from "../../../constants/theme.const.tsx";
 
 interface RoomTaskCardProps {
   task: Task;
@@ -22,6 +24,10 @@ const RoomTaskCard: React.FC<RoomTaskCardProps> = ({
     id: task._id.toString(),
     disabled: isLoadingChangeStatus,
   });
+
+  const formattedDate = task.deadline
+    ? formatDistanceToNow(task.deadline, { addSuffix: true })
+    : "";
 
   const style = {
     transform: transform
@@ -42,6 +48,17 @@ const RoomTaskCard: React.FC<RoomTaskCardProps> = ({
       <RoomTaskCardDescriptionWrapper>
         {task.description}
       </RoomTaskCardDescriptionWrapper>
+      {task.deadline && (
+        <SecondaryText
+          sx={{
+            marginLeft: "auto",
+            fontSize: "12px",
+            marginTop: theme.spacing(1),
+          }}
+        >
+          Deadline: {formattedDate}
+        </SecondaryText>
+      )}
       <RoomTaskCardAssignedToWrapper>
         <Avatar
           sx={{ height: "30px", width: "30px" }}
@@ -51,11 +68,6 @@ const RoomTaskCard: React.FC<RoomTaskCardProps> = ({
         <SecondaryText sx={{ fontSize: "12px" }}>
           {task.assignedTo.name}
         </SecondaryText>
-        {task.deadline && (
-          <SecondaryText sx={{ alignSelf: "end" }}>
-            {task.deadline}
-          </SecondaryText>
-        )}
       </RoomTaskCardAssignedToWrapper>
     </RoomTaskCardWrapper>
   );

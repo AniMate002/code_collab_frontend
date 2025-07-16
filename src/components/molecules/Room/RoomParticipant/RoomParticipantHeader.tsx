@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import Title from "../../../atoms/Title/Title.tsx";
 import { useJoinRoomMutation } from "../../../../store/api/room.api.ts";
 import { Toast } from "../../../atoms/Toast/Toast.ts";
+import { useRoomAdmin } from "../../../../hooks/useRoomAdmin.tsx";
 
 const RoomParticipantHeader: React.FC<Room> = ({
   _id,
@@ -17,8 +18,10 @@ const RoomParticipantHeader: React.FC<Room> = ({
   title,
   description,
   contributors,
+  admin,
 }) => {
   const [leaveRoom, { isLoading }] = useJoinRoomMutation();
+  const { isAdmin } = useRoomAdmin(admin?._id?.toString() || "");
   const handleLeaveRoom = async () => {
     try {
       await leaveRoom(_id.toString()).unwrap();
@@ -49,13 +52,19 @@ const RoomParticipantHeader: React.FC<Room> = ({
           {description}
         </RoomParticipantHeaderLeaveDescriptionWrapper>
       </Box>
-      {/*TODO: Admin can not leave room - only edit or delete*/}
-      <StyledRoomParticipantHeaderLeaveButton
-        loading={isLoading}
-        onClick={handleLeaveRoom}
-      >
-        Leave room
-      </StyledRoomParticipantHeaderLeaveButton>
+      {/*TODO: Add edit room functionality*/}
+      {isAdmin ? (
+        <StyledRoomParticipantHeaderLeaveButton>
+          Edit room
+        </StyledRoomParticipantHeaderLeaveButton>
+      ) : (
+        <StyledRoomParticipantHeaderLeaveButton
+          loading={isLoading}
+          onClick={handleLeaveRoom}
+        >
+          Leave room
+        </StyledRoomParticipantHeaderLeaveButton>
+      )}
     </RoomParticipantHeaderWrapper>
   );
 };

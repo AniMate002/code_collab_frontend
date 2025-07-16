@@ -12,7 +12,7 @@ const RoomContributors: React.FC<RoomContributorsProps> = ({ roomId }) => {
   const { data: contributors, isLoading } = useGetRoomContributorsQuery(roomId);
   return (
     <>
-      {/*TODO: Implement invite user logic*/}
+      {/*TODO: Implement invite user logic after implementing notification system*/}
       <TabHeader
         title="Contributors"
         showButton={true}

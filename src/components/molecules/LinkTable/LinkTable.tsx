@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Link as LinkReactRouter } from "react-router";
+import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
 
 interface LinkTableProps {
   links: Link[];
@@ -18,6 +19,8 @@ interface LinkTableProps {
 
 const LinkTable: React.FC<LinkTableProps> = ({ links }) => {
   const theme = useTheme();
+  if (!links || links.length === 0)
+    return <SecondaryText>No links</SecondaryText>;
   return (
     <TableContainer>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

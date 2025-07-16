@@ -15,6 +15,7 @@ import {
   taskSchema,
 } from "../../types/room.types.ts";
 import { type User, userSchema } from "../../types/user.types.ts";
+import { type Activity, activitySchema } from "../../types/activity.types.ts";
 
 export const roomApi = createApi({
   reducerPath: "roomApi",
@@ -27,6 +28,7 @@ export const roomApi = createApi({
     API_TAGS.Files,
     API_TAGS.Links,
     API_TAGS.Tasks,
+    API_TAGS.Activities,
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
@@ -47,7 +49,7 @@ export const roomApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [API_TAGS.Rooms],
+      invalidatesTags: [API_TAGS.Rooms, API_TAGS.Activities],
     }),
     getRoomById: build.query<Room, string>({
       query: (roomId) => `/${roomId}`,
@@ -68,6 +70,7 @@ export const roomApi = createApi({
         API_TAGS.Rooms,
         API_TAGS.AuthUser,
         API_TAGS.Contributors,
+        API_TAGS.Activities,
       ],
     }),
     getRoomMessages: build.query<Message[], string>({
@@ -94,7 +97,7 @@ export const roomApi = createApi({
         method: "POST",
         body: { file: payload.file },
       }),
-      invalidatesTags: [API_TAGS.Files],
+      invalidatesTags: [API_TAGS.Files, API_TAGS.Activities],
     }),
     getRoomLinks: build.query<Link[], string>({
       query: (roomId) => `/${roomId}/link`,
@@ -110,7 +113,7 @@ export const roomApi = createApi({
         method: "POST",
         body: { link: payload.link, name: payload.name },
       }),
-      invalidatesTags: [API_TAGS.Links],
+      invalidatesTags: [API_TAGS.Links, API_TAGS.Activities],
     }),
     getRoomTasks: build.query<Task[], string>({
       query: (roomId) => `/${roomId}/task`,
@@ -126,7 +129,7 @@ export const roomApi = createApi({
         method: "PATCH",
         body: { status: payload.status, taskId: payload.taskId },
       }),
-      invalidatesTags: [API_TAGS.Tasks],
+      invalidatesTags: [API_TAGS.Tasks, API_TAGS.Activities],
     }),
     createRoomTask: build.mutation<
       Task,
@@ -137,7 +140,12 @@ export const roomApi = createApi({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: [API_TAGS.Tasks],
+      invalidatesTags: [API_TAGS.Tasks, API_TAGS.Activities],
+    }),
+    getRoomActivity: build.query<Activity[], string>({
+      query: (roomId) => `/${roomId}/activity`,
+      providesTags: [API_TAGS.Activities],
+      rawResponseSchema: activitySchema.array(),
     }),
   }),
 });
@@ -158,4 +166,5 @@ export const {
   useGetRoomTasksQuery,
   useChangeRoomTaskStatusMutation,
   useCreateRoomTaskMutation,
+  useGetRoomActivityQuery,
 } = roomApi;

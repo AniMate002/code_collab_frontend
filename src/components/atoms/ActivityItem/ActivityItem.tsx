@@ -11,15 +11,24 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import {
   ActivityTypeIcons,
   type ActivityType,
+  type ActivityLineMode,
+  ActivityLineModes,
 } from "../../../constants/activity.const.ts";
-import { Typography, useTheme } from "@mui/material";
+import { Avatar, Typography, useTheme } from "@mui/material";
+import { NavLink } from "react-router";
+import { RouterPaths } from "../../../router/paths.tsx";
 
 interface ActivityItemProps {
   activity: Activity;
   isLast: boolean;
+  mode: ActivityLineMode;
 }
 
-const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast }) => {
+const ActivityItem: React.FC<ActivityItemProps> = ({
+  activity,
+  isLast,
+  mode,
+}) => {
   const theme = useTheme();
   const Icon = ActivityTypeIcons[activity.title as ActivityType];
   const date = new Date(activity.createdAt);
@@ -27,9 +36,28 @@ const ActivityItem: React.FC<ActivityItemProps> = ({ activity, isLast }) => {
 
   return (
     <TimelineItem>
-      <TimelineOppositeContent
-        sx={{ display: "none" }}
-      ></TimelineOppositeContent>
+      <TimelineOppositeContent>
+        <NavLink
+          to={
+            mode === ActivityLineModes.ROOM && typeof activity.user !== "string"
+              ? RouterPaths.PROFILE(activity?.user?._id?.toString() || "")
+              : typeof activity.room !== "string"
+                ? RouterPaths.ROOM(activity?.room?._id?.toString() || "")
+                : ""
+          }
+        >
+          <Avatar
+            src={
+              mode === ActivityLineModes.ROOM &&
+              typeof activity.user !== "string"
+                ? activity?.user?.avatar
+                : typeof activity.room !== "string"
+                  ? activity?.room?.image
+                  : ""
+            }
+          />
+        </NavLink>
+      </TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot
           variant="outlined"

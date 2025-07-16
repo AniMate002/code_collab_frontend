@@ -49,7 +49,7 @@ export const roomSchema = z.object({
     ),
   topic: z.string(),
   contributors: z.string().array().optional(),
-  activities: z.string().array().optional(),
+  admin: userSchema.partial().optional(),
   type: z.string().nonempty(),
   messages: messageSchema.array().optional(),
   links: linkSchema.array().optional(),

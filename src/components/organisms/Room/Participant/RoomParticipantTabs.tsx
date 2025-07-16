@@ -7,6 +7,7 @@ import RoomFiles from "./Tabs/RoomFiles.tsx";
 import RoomLinks from "./Tabs/RoomLinks.tsx";
 import RoomContributors from "./Tabs/RoomContributors.tsx";
 import RoomTasks from "./Tabs/RoomTasks.tsx";
+import RoomActivity from "./Tabs/RoomActivity.tsx";
 
 interface RoomParticipantTabsProps {
   roomId: string;
@@ -39,7 +40,7 @@ const RoomParticipantTabs: React.FC<RoomParticipantTabsProps> = ({
         {tabValue === 0 && <RoomChat roomId={roomId} />}
         {tabValue === 1 && <RoomFiles roomId={roomId} />}
         {tabValue === 2 && <RoomLinks roomId={roomId} />}
-        {tabValue === 3 && <div>Activity</div>}
+        {tabValue === 3 && <RoomActivity roomId={roomId} />}
         {tabValue === 4 && <RoomContributors roomId={roomId} />}
         {tabValue === 5 && <RoomTasks roomId={roomId} />}
       </Box>

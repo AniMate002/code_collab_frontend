@@ -8,7 +8,6 @@ import LinkTable from "../../../../molecules/LinkTable/LinkTable.tsx";
 import CreateLinkModal from "../../../../molecules/LinkTable/CreateLinkModal.tsx";
 import { Toast } from "../../../../atoms/Toast/Toast.ts";
 import type { CreateLinkFormData } from "../../../../../types/room.types.ts";
-import SecondaryText from "../../../../atoms/SecondaryText/SecondaryText.tsx";
 import { Box, Skeleton, useTheme } from "@mui/material";
 
 interface RoomLinksProps {
@@ -36,9 +35,6 @@ const RoomLinks: React.FC<RoomLinksProps> = ({ roomId }) => {
   };
 
   if (isLoading) return <RoomLinksSkeleton />;
-  // TODO: Place this logic inside tables and grid because you cant see header and create new
-  if ((!isLoading && !links) || links?.length === 0)
-    return <SecondaryText>No links</SecondaryText>;
   return (
     <>
       <TabHeader

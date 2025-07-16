@@ -45,3 +45,11 @@ export const ActivityTypeIcons = {
   [ActivityTypes.requestRoom]: SensorOccupiedIcon,
   [ActivityTypes.requestRejected]: ThumbDownAltIcon,
 };
+
+export const ActivityLineModes = {
+  ROOM: "ROOM",
+  USER: "USER",
+} as const;
+
+export type ActivityLineMode =
+  (typeof ActivityLineModes)[keyof typeof ActivityLineModes];
