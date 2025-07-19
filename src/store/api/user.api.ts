@@ -7,6 +7,7 @@ import {
 } from "../../types/user.types.ts";
 import { type Room, roomSchema } from "../../types/room.types.ts";
 import { type Activity, activitySchema } from "../../types/activity.types.ts";
+import type { SearchQuery } from "../../types/shared.types.ts";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -78,6 +79,11 @@ export const userApi = createApi({
       }),
       invalidatesTags: [API_TAGS.AuthUser],
     }),
+    searchUsersByQuery: build.query<User[], SearchQuery>({
+      query: (payload) => `/search?query=${payload.query}`,
+      rawResponseSchema: userSchema.partial().array(),
+      providesTags: [API_TAGS.Users],
+    }),
   }),
 });
 
@@ -91,4 +97,5 @@ export const {
   useGetFeaturedUsersQuery,
   useGetUsersBySpecializationQuery,
   useUpdateUserMutation,
+  useLazySearchUsersByQueryQuery,
 } = userApi;

@@ -16,6 +16,7 @@ import {
 } from "../../types/room.types.ts";
 import { type User, userSchema } from "../../types/user.types.ts";
 import { type Activity, activitySchema } from "../../types/activity.types.ts";
+import type { SearchQuery } from "../../types/shared.types.ts";
 
 export const roomApi = createApi({
   reducerPath: "roomApi",
@@ -147,6 +148,11 @@ export const roomApi = createApi({
       providesTags: [API_TAGS.Activities],
       rawResponseSchema: activitySchema.array(),
     }),
+    searchRoomsByQuery: build.query<Room[], SearchQuery>({
+      query: (payload) => `/search?query=${payload.query}`,
+      rawResponseSchema: roomSchema.partial().array(),
+      providesTags: [API_TAGS.Rooms],
+    }),
   }),
 });
 
@@ -167,4 +173,5 @@ export const {
   useChangeRoomTaskStatusMutation,
   useCreateRoomTaskMutation,
   useGetRoomActivityQuery,
+  useLazySearchRoomsByQueryQuery,
 } = roomApi;
