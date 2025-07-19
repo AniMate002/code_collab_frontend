@@ -5,6 +5,7 @@ import { RouterPaths } from "../router/paths.tsx";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PeopleIcon from "@mui/icons-material/People";
 import TagIcon from "@mui/icons-material/Tag";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 export interface SidebarNavLink {
   href: string;
@@ -38,5 +39,10 @@ export const sidebarNavLinks: SidebarNavLink[] = [
     href: RouterPaths.MY_ROOMS,
     label: "My Rooms",
     Icon: TagIcon,
+  },
+  {
+    href: RouterPaths.NOTIFICATIONS,
+    label: "Notifications",
+    Icon: NotificationsIcon,
   },
 ];

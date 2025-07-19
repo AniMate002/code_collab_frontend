@@ -19,6 +19,7 @@ import { RoomTypes } from "../../../../constants/room.const.ts";
 import Button from "../../../atoms/Button/Button.tsx";
 import { Toast } from "../../../atoms/Toast/Toast.ts";
 import { useAuth } from "../../../../providers/auth.provider.tsx";
+import { useSendRequestMutation } from "../../../../store/api/notification.api.ts";
 
 interface RoomNotParticipantLayoutProps {
   room: Room;
@@ -31,6 +32,8 @@ const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
   const theme = useTheme();
   const navigate = useNavigate();
   const [joinRoom, { isLoading: isLoadingJoinRoom }] = useJoinRoomMutation();
+  const [sendRequest, { isLoading: isLoadingSendRequest }] =
+    useSendRequestMutation();
   const { data: contributors, isLoading } = useGetRoomContributorsQuery(
     room._id.toString(),
   );
@@ -38,7 +41,11 @@ const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
     if (!isAuth) return navigate(RouterPaths.LOGIN);
     try {
       if (room.type === RoomTypes.PRIVATE) {
-        //   TODO: ADD sendRequest LOGIC AFTER ADDING NOTIFICATIONS
+        await sendRequest({ roomId: room._id.toString() }).unwrap();
+        await Toast.fire({
+          icon: "success",
+          title: "Successfully sent request",
+        });
       } else {
         await joinRoom(room._id.toString()).unwrap();
         await Toast.fire({
@@ -53,6 +60,7 @@ const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
       });
     }
   };
+
   return (
     <RoomNotParticipantLayoutWrapper>
       <RoomNotParticipantHeaderWrapper>
@@ -107,7 +115,7 @@ const RoomNotParticipantLayout: React.FC<RoomNotParticipantLayoutProps> = ({
       )}
       <Button
         onClick={handleJoinRoom}
-        loading={isLoadingJoinRoom}
+        loading={isLoadingJoinRoom || isLoadingSendRequest}
         sx={{ marginTop: theme.spacing(4), minWidth: "300px", width: "auto" }}
       >
         {room.type === RoomTypes.PRIVATE ? "ASK TO JOIN" : "JOIN"}

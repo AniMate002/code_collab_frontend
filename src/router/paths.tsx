@@ -7,6 +7,7 @@ export class RouterPaths {
   static CREATE_ROOM = "/create-room";
   static MY_ROOMS = "/my-rooms";
   static FOLLOWING = "/following";
+  static NOTIFICATIONS = "/notifications";
 
   static ROOM(id: string | number) {
     return `/room/${id}`;

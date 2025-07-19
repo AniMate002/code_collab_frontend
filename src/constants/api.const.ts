@@ -12,6 +12,7 @@ export const API_TAGS = {
   Contributors: "Contributors",
   Messages: "Messages",
   Tasks: "Tasks",
+  Notifications: "Notifications",
 } as const;
 
 export const responseMessageSchema = z.object({

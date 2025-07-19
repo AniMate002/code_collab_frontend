@@ -76,4 +76,12 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/MyRooms/MyRooms.page.tsx"),
     ),
   },
+  {
+    title: "Notifications",
+    path: RouterPaths.NOTIFICATIONS,
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/Notifications/Notifications.page.tsx"),
+    ),
+  },
 ];

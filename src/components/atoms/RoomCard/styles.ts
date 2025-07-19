@@ -38,6 +38,14 @@ export const RoomDescriptionWrapper = styled(Typography)(({ theme }) => ({
   overflow: "hidden",
 }));
 
+export const RoomHeaderWrapper = styled(Typography)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: theme.spacing(1),
+  width: "100%",
+  flexWrap: "wrap",
+}));
+
 export const RoomTopicWrapper = styled(Typography)(({ theme }) => ({
   fontSize: "12px",
   color: theme.palette.text.secondary,
@@ -46,4 +54,11 @@ export const RoomTopicWrapper = styled(Typography)(({ theme }) => ({
   padding: "4px 12px",
   display: "block",
   width: "fit-content",
+}));
+
+export const RoomTypeWrapper = styled(Typography)(({ theme }) => ({
+  fontSize: "12px",
+  color: theme.palette.text.secondary,
+  fontWeight: theme.typography.fontWeightMedium,
+  textTransform: "capitalize",
 }));

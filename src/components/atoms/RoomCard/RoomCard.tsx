@@ -3,9 +3,11 @@ import type { Room } from "../../../types/room.types.ts";
 import {
   RoomCardWrapper,
   RoomDescriptionWrapper,
+  RoomHeaderWrapper,
   RoomImageWrapper,
   RoomTitleWrapper,
   RoomTopicWrapper,
+  RoomTypeWrapper,
 } from "./styles.ts";
 import { Skeleton } from "@mui/material";
 import { useNavigate } from "react-router";
@@ -24,7 +26,10 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
       <RoomImageWrapper>
         <img src={room.image} alt={room.title} />
       </RoomImageWrapper>
-      <RoomTopicWrapper>{room.topic}</RoomTopicWrapper>
+      <RoomHeaderWrapper>
+        <RoomTopicWrapper>{room.topic}</RoomTopicWrapper>
+        <RoomTypeWrapper>{room.type}</RoomTypeWrapper>
+      </RoomHeaderWrapper>
       <RoomTitleWrapper>{room.title}</RoomTitleWrapper>
       <RoomDescriptionWrapper>{room.description}</RoomDescriptionWrapper>
     </RoomCardWrapper>
