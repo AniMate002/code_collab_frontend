@@ -23,7 +23,9 @@ import {
 } from "../../../constants/notification.const.ts";
 import { RouterPaths } from "../../../router/paths.tsx";
 import {
+  useAcceptInvitationMutation,
   useAcceptRequestMutation,
+  useRejectNotificationMutation,
   useRejectRequestMutation,
 } from "../../../store/api/notification.api.ts";
 import { Toast } from "../Toast/Toast.ts";
@@ -39,16 +41,26 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
     useAcceptRequestMutation();
   const [rejectRequest, { isLoading: isLoadingRejectRequest }] =
     useRejectRequestMutation();
+  const [acceptInvitation, { isLoading: isLoadingAcceptInvitation }] =
+    useAcceptInvitationMutation();
+  const [rejectInvitation, { isLoading: isLoadingRejectInvitation }] =
+    useRejectNotificationMutation();
   const Icon = NotificationTypeIcons[notification.type];
   const title = NotificationTypeTitles[notification.type];
-  const handleClickAcceptRequest = async () => {
+  const handleClickAcceptNotification = async () => {
     try {
-      await acceptRequest({
-        notificationId: notification._id.toString(),
-      }).unwrap();
+      if (notification.type === NotificationTypes.INVITATION) {
+        await acceptInvitation({
+          notificationId: notification._id.toString(),
+        }).unwrap();
+      } else if (notification.type === NotificationTypes.REQUEST) {
+        await acceptRequest({
+          notificationId: notification._id.toString(),
+        }).unwrap();
+      }
       await Toast.fire({
         icon: "success",
-        title: "Request accepted",
+        title: `${notification.type === NotificationTypes.REQUEST ? "Request" : "Invitation"} accepted`,
       });
     } catch (error: any) {
       await Toast.fire({
@@ -58,14 +70,20 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
     }
   };
 
-  const handleClickRejectRequest = async () => {
+  const handleClickRejectNotification = async () => {
     try {
-      await rejectRequest({
-        notificationId: notification._id.toString(),
-      }).unwrap();
+      if (notification.type === NotificationTypes.INVITATION) {
+        await rejectInvitation({
+          notificationId: notification._id.toString(),
+        }).unwrap();
+      } else if (notification.type === NotificationTypes.REQUEST) {
+        await rejectRequest({
+          notificationId: notification._id.toString(),
+        }).unwrap();
+      }
       await Toast.fire({
-        icon: "success",
-        title: "Request accepted",
+        icon: "info",
+        title: `${notification.type === NotificationTypes.REQUEST ? "Request" : "Invitation"} rejected`,
       });
     } catch (error: any) {
       await Toast.fire({
@@ -110,23 +128,34 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
         </NotificationItemSecondaryWrapper>
       </NotificationItemContentWrapper>
       <NotificationItemRightSection>
-        {notification.type === NotificationTypes.REQUEST &&
-          !notification.isResolved && (
-            <>
-              <NotificationItemPrimaryBtn
-                loading={isLoadingAcceptRequest}
-                onClick={handleClickAcceptRequest}
-              >
-                Accept
-              </NotificationItemPrimaryBtn>
-              <NotificationItemSecondaryBtn
-                loading={isLoadingRejectRequest}
-                onClick={handleClickRejectRequest}
-              >
-                Reject
-              </NotificationItemSecondaryBtn>
-            </>
-          )}
+        {notification.type === NotificationTypes.REQUEST ||
+          (notification.type === NotificationTypes.INVITATION &&
+            !notification.isResolved && (
+              <>
+                <NotificationItemPrimaryBtn
+                  loading={
+                    isLoadingAcceptRequest ||
+                    isLoadingRejectRequest ||
+                    isLoadingAcceptInvitation ||
+                    isLoadingRejectInvitation
+                  }
+                  onClick={handleClickAcceptNotification}
+                >
+                  Accept
+                </NotificationItemPrimaryBtn>
+                <NotificationItemSecondaryBtn
+                  loading={
+                    isLoadingRejectRequest ||
+                    isLoadingAcceptRequest ||
+                    isLoadingAcceptInvitation ||
+                    isLoadingRejectInvitation
+                  }
+                  onClick={handleClickRejectNotification}
+                >
+                  Reject
+                </NotificationItemSecondaryBtn>
+              </>
+            ))}
       </NotificationItemRightSection>
     </NotificationItemWrapper>
   );

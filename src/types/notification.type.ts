@@ -12,6 +12,8 @@ export const notificationSchema = z.object({
     "requestRejected",
     "follow",
     "request",
+    "invitationAccepted",
+    "invitationRejected",
   ]),
   room: roomSchema.partial().optional(),
   isAccepted: z.boolean(),

@@ -48,6 +48,36 @@ export const notificationApi = createApi({
         API_TAGS.AuthUser,
       ],
     }),
+    sendInvitation: build.mutation<void, { roomId: string; to: string }>({
+      query: (payload) => ({
+        url: `/sendInvitation`,
+        method: "POST",
+        body: { roomId: payload.roomId, to: payload.to },
+      }),
+      invalidatesTags: [
+        API_TAGS.Notifications,
+        API_TAGS.Activities,
+        API_TAGS.AuthUser,
+      ],
+    }),
+    acceptInvitation: build.mutation<void, { notificationId: string }>({
+      query: (payload) => ({
+        url: `/${payload.notificationId}/acceptInvitation`,
+        method: "PUT",
+      }),
+      invalidatesTags: [
+        API_TAGS.Notifications,
+        API_TAGS.Activities,
+        API_TAGS.AuthUser,
+      ],
+    }),
+    rejectNotification: build.mutation<void, { notificationId: string }>({
+      query: (payload) => ({
+        url: `/${payload.notificationId}/rejectInvitation`,
+        method: "PUT",
+      }),
+      invalidatesTags: [API_TAGS.Notifications, API_TAGS.Activities],
+    }),
   }),
 });
 
@@ -56,4 +86,7 @@ export const {
   useSendRequestMutation,
   useAcceptRequestMutation,
   useRejectRequestMutation,
+  useSendInvitationMutation,
+  useAcceptInvitationMutation,
+  useRejectNotificationMutation,
 } = notificationApi;
