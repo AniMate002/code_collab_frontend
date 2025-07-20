@@ -30,6 +30,7 @@ export const roomApi = createApi({
     API_TAGS.Links,
     API_TAGS.Tasks,
     API_TAGS.Activities,
+    API_TAGS.Users,
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_API_URL}/room`,
@@ -153,6 +154,19 @@ export const roomApi = createApi({
       rawResponseSchema: roomSchema.partial().array(),
       providesTags: [API_TAGS.Rooms],
     }),
+    editRoom: build.mutation<Room, CreateRoomFormData & { _id: string }>({
+      query: (body) => ({
+        url: `/${body._id}/edit`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: [
+        API_TAGS.Rooms,
+        API_TAGS.Activities,
+        API_TAGS.Users,
+        API_TAGS.AuthUser,
+      ],
+    }),
   }),
 });
 
@@ -174,4 +188,5 @@ export const {
   useCreateRoomTaskMutation,
   useGetRoomActivityQuery,
   useLazySearchRoomsByQueryQuery,
+  useEditRoomMutation,
 } = roomApi;

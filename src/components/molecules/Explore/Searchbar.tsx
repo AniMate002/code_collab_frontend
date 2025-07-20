@@ -19,7 +19,7 @@ interface SearchbarProps {
   setSearchedUsers: (users: User[] | null) => void;
   setIsLoadingSearch: (isLoading: boolean) => void;
 }
-
+// TODO: apply search logic for following and my rooms pages
 const Searchbar: React.FC<SearchbarProps> = ({
   exploreTabValue,
   setSearchedRooms,

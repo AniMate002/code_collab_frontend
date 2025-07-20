@@ -24,3 +24,10 @@ export const TaskStatuses = {
 } as const;
 
 export type TaskStatus = (typeof TaskStatuses)[keyof typeof TaskStatuses];
+
+export const RoomFormModes = {
+  CREATE: "CREATE",
+  EDIT: "EDIT",
+} as const;
+
+export type RoomFormMode = (typeof RoomFormModes)[keyof typeof RoomFormModes];

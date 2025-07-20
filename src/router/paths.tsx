@@ -13,6 +13,10 @@ export class RouterPaths {
     return `/room/${id}`;
   }
 
+  static EDIT_ROOM(id: string | number) {
+    return `${RouterPaths.ROOM(id)}/edit`;
+  }
+
   static PROFILE(id: string | number) {
     return `/profile/${id}`;
   }

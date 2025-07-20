@@ -11,6 +11,8 @@ import Title from "../../../atoms/Title/Title.tsx";
 import { useJoinRoomMutation } from "../../../../store/api/room.api.ts";
 import { Toast } from "../../../atoms/Toast/Toast.ts";
 import { useRoomAdmin } from "../../../../hooks/useRoomAdmin.tsx";
+import { useNavigate } from "react-router";
+import { RouterPaths } from "../../../../router/paths.tsx";
 
 const RoomParticipantHeader: React.FC<Room> = ({
   _id,
@@ -22,6 +24,7 @@ const RoomParticipantHeader: React.FC<Room> = ({
 }) => {
   const [leaveRoom, { isLoading }] = useJoinRoomMutation();
   const { isAdmin } = useRoomAdmin(admin?._id?.toString() || "");
+  const navigate = useNavigate();
   const handleLeaveRoom = async () => {
     try {
       await leaveRoom(_id.toString()).unwrap();
@@ -54,7 +57,9 @@ const RoomParticipantHeader: React.FC<Room> = ({
       </Box>
       {/*TODO: Add edit room functionality*/}
       {isAdmin ? (
-        <StyledRoomParticipantHeaderLeaveButton>
+        <StyledRoomParticipantHeaderLeaveButton
+          onClick={() => navigate(RouterPaths.EDIT_ROOM(_id.toString()))}
+        >
           Edit room
         </StyledRoomParticipantHeaderLeaveButton>
       ) : (

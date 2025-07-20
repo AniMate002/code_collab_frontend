@@ -84,4 +84,12 @@ export const AppRoutes: RouterType[] = [
       () => import("../components/pages/Notifications/Notifications.page.tsx"),
     ),
   },
+  {
+    title: "Edit Room",
+    path: RouterPaths.EDIT_ROOM(":id"),
+    requireAuth: true,
+    element: React.lazy(
+      () => import("../components/pages/EditRoom/EditRoom.page.tsx"),
+    ),
+  },
 ];

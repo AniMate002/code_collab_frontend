@@ -2,7 +2,12 @@ import React from "react";
 import { CreateRoomFormWrapper } from "./styles.ts";
 import Input from "../../atoms/Input/Input.tsx";
 import Select from "../../atoms/Select/Select.tsx";
-import { RoomTopics, RoomTypes } from "../../../constants/room.const.ts";
+import {
+  type RoomFormMode,
+  RoomFormModes,
+  RoomTopics,
+  RoomTypes,
+} from "../../../constants/room.const.ts";
 import Switch from "../../atoms/Switch/Switch.tsx";
 import { FormControlLabel } from "@mui/material";
 import ImagePicker from "../../atoms/ImagePicker/ImagePicker.tsx";
@@ -11,15 +16,27 @@ import { useForm } from "react-hook-form";
 import {
   type CreateRoomFormData,
   createRoomSchema,
+  type Room,
 } from "../../../types/room.types.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateRoomMutation } from "../../../store/api/room.api.ts";
+import {
+  useCreateRoomMutation,
+  useEditRoomMutation,
+} from "../../../store/api/room.api.ts";
 import { useNavigate } from "react-router";
 import { RouterPaths } from "../../../router/paths.tsx";
 import { Toast } from "../../atoms/Toast/Toast.ts";
 
-const CreateRoomForm: React.FC = () => {
-  const [createRoom, { isLoading }] = useCreateRoomMutation();
+interface RoomFormProps {
+  defaultValues?: Room;
+  mode: RoomFormMode;
+}
+
+const RoomForm: React.FC<RoomFormProps> = ({ defaultValues, mode }) => {
+  const [createRoom, { isLoading: isLoadingCreateRoom }] =
+    useCreateRoomMutation();
+  const [editRoom, { isLoading: isLoadingEditRoom }] = useEditRoomMutation();
+
   const navigate = useNavigate();
   const filteredRoomTopics = Object.fromEntries(
     Object.entries(RoomTopics).filter(([key]) => key !== "ALL"),
@@ -33,14 +50,22 @@ const CreateRoomForm: React.FC = () => {
   } = useForm<CreateRoomFormData>({
     resolver: zodResolver(createRoomSchema),
     defaultValues: {
-      type: RoomTypes.PUBLIC,
-      topic: RoomTopics.General,
+      title: defaultValues ? defaultValues.title : "",
+      topic: defaultValues ? defaultValues.topic : RoomTopics.General,
+      description: defaultValues ? defaultValues.description : "",
+      type: defaultValues ? defaultValues.type : RoomTypes.PUBLIC,
+      image: defaultValues ? defaultValues.image : "",
     },
   });
   const onSubmit = async (data: CreateRoomFormData) => {
     try {
-      await createRoom(data).unwrap();
-      navigate(RouterPaths.MY_ROOMS);
+      if (mode === RoomFormModes.EDIT && defaultValues) {
+        await editRoom({ _id: defaultValues._id.toString(), ...data }).unwrap();
+        navigate(RouterPaths.ROOM(defaultValues._id.toString()));
+      } else if (mode === RoomFormModes.CREATE) {
+        await createRoom(data).unwrap();
+        navigate(RouterPaths.MY_ROOMS);
+      }
     } catch (error: any) {
       await Toast.fire({
         icon: "error",
@@ -93,11 +118,15 @@ const CreateRoomForm: React.FC = () => {
       <ImagePicker
         setImage={(image) => setValue("image", image, { shouldDirty: true })}
       />
-      <Button loading={isLoading} disabled={!isDirty} type={"submit"}>
-        Create room
+      <Button
+        loading={isLoadingCreateRoom || isLoadingEditRoom}
+        disabled={!isDirty}
+        type={"submit"}
+      >
+        {mode === RoomFormModes.CREATE ? "Create room" : "Save room"}
       </Button>
     </CreateRoomFormWrapper>
   );
 };
 
-export default CreateRoomForm;
+export default RoomForm;
