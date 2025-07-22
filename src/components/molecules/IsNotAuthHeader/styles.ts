@@ -4,6 +4,6 @@ export const IsAuthHeaderWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "200px",
+  maxWidth: "50vw",
   gap: theme.spacing(1),
 }));

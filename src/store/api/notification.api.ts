@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_TAGS, BASE_API_URL } from "../../constants/api.const.ts";
 import type { Notification } from "../../types/notification.type.ts";
+import { z } from "zod";
 
 export const notificationApi = createApi({
   reducerPath: "notificationApi",
@@ -13,6 +14,7 @@ export const notificationApi = createApi({
     getAuthUserNotifications: build.query<Notification[], void>({
       query: () => "/",
       providesTags: [API_TAGS.Notifications],
+      keepUnusedDataFor: 0,
     }),
     sendRequest: build.mutation<void, { roomId: string }>({
       query: (payload) => ({
@@ -78,6 +80,11 @@ export const notificationApi = createApi({
       }),
       invalidatesTags: [API_TAGS.Notifications, API_TAGS.Activities],
     }),
+    getNewUnreadNotifications: build.query<number, void>({
+      query: () => "/unread",
+      providesTags: [API_TAGS.Notifications],
+      rawResponseSchema: z.number(),
+    }),
   }),
 });
 
@@ -89,4 +96,5 @@ export const {
   useSendInvitationMutation,
   useAcceptInvitationMutation,
   useRejectNotificationMutation,
+  useGetNewUnreadNotificationsQuery,
 } = notificationApi;

@@ -2,8 +2,7 @@ import React from "react";
 import { IsAuthHeaderWrapper } from "../IsNotAuthHeader/styles.ts";
 import type { User } from "../../../types/user.types.ts";
 import { Avatar } from "@mui/material";
-import SecondaryButton from "../../atoms/SecondaryButton/SecondaryButton.tsx";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import HeaderNotifications from "./HeaderNotifications.tsx";
 
 interface IsAuthHeaderProps {
   authUser: User;
@@ -12,10 +11,7 @@ interface IsAuthHeaderProps {
 const IsAuthHeader: React.FC<IsAuthHeaderProps> = ({ authUser }) => {
   return (
     <IsAuthHeaderWrapper>
-      <SecondaryButton sx={{ width: "fit-content" }}>
-        <NotificationsIcon />
-      </SecondaryButton>
-
+      <HeaderNotifications />
       <Avatar
         alt={authUser.name}
         src={authUser.avatar}

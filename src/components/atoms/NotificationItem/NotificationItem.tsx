@@ -92,8 +92,15 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
       });
     }
   };
+  const wrapperUnreadNotificationStyles = !notification.isRead
+    ? {
+        borderLeft: "2px solid",
+        borderColor: "#0A80ED",
+        borderRadius: "12px",
+      }
+    : null;
   return (
-    <NotificationItemWrapper>
+    <NotificationItemWrapper sx={wrapperUnreadNotificationStyles}>
       <NotificationItemIconWrapper>
         <Icon sx={{ fontSize: "24px" }} />
       </NotificationItemIconWrapper>
