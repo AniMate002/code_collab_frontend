@@ -128,34 +128,34 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
         </NotificationItemSecondaryWrapper>
       </NotificationItemContentWrapper>
       <NotificationItemRightSection>
-        {notification.type === NotificationTypes.REQUEST ||
-          (notification.type === NotificationTypes.INVITATION &&
-            !notification.isResolved && (
-              <>
-                <NotificationItemPrimaryBtn
-                  loading={
-                    isLoadingAcceptRequest ||
-                    isLoadingRejectRequest ||
-                    isLoadingAcceptInvitation ||
-                    isLoadingRejectInvitation
-                  }
-                  onClick={handleClickAcceptNotification}
-                >
-                  Accept
-                </NotificationItemPrimaryBtn>
-                <NotificationItemSecondaryBtn
-                  loading={
-                    isLoadingRejectRequest ||
-                    isLoadingAcceptRequest ||
-                    isLoadingAcceptInvitation ||
-                    isLoadingRejectInvitation
-                  }
-                  onClick={handleClickRejectNotification}
-                >
-                  Reject
-                </NotificationItemSecondaryBtn>
-              </>
-            ))}
+        {(notification.type === "invitation" ||
+          notification.type === "request") &&
+          !notification.isResolved && (
+            <>
+              <NotificationItemPrimaryBtn
+                loading={
+                  isLoadingAcceptRequest ||
+                  isLoadingRejectRequest ||
+                  isLoadingAcceptInvitation ||
+                  isLoadingRejectInvitation
+                }
+                onClick={handleClickAcceptNotification}
+              >
+                Accept
+              </NotificationItemPrimaryBtn>
+              <NotificationItemSecondaryBtn
+                loading={
+                  isLoadingRejectRequest ||
+                  isLoadingAcceptRequest ||
+                  isLoadingAcceptInvitation ||
+                  isLoadingRejectInvitation
+                }
+                onClick={handleClickRejectNotification}
+              >
+                Reject
+              </NotificationItemSecondaryBtn>
+            </>
+          )}
       </NotificationItemRightSection>
     </NotificationItemWrapper>
   );
