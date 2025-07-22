@@ -3,6 +3,7 @@ import type { Notification } from "../../../types/notification.type.ts";
 import { NotificationListWrapper } from "./styles.ts";
 import NotificationItem from "../../atoms/NotificationItem/NotificationItem.tsx";
 import SecondaryText from "../../atoms/SecondaryText/SecondaryText.tsx";
+import { Skeleton } from "@mui/material";
 
 interface NotificationListProps {
   notifications: Notification[];
@@ -19,14 +20,24 @@ const NotificationList: React.FC<NotificationListProps> = ({
       key={notification._id.toString()}
     />
   ));
-  // TODO: add skeleton
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading) return <NotificationListSkeleton />;
 
   if (!isLoading && notifications && notifications.length === 0)
     return <SecondaryText>No notifications</SecondaryText>;
 
   return (
     <NotificationListWrapper>{renderedNotifications}</NotificationListWrapper>
+  );
+};
+
+const NotificationListSkeleton = () => {
+  return (
+    <NotificationListWrapper>
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+    </NotificationListWrapper>
   );
 };
 

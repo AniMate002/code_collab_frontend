@@ -2,7 +2,7 @@ import React from "react";
 import SkillItem from "../../../atoms/SkillItem/SkillItem.tsx";
 import { ProfileSkillsWrapper } from "./styles.ts";
 import { Box, Typography, useTheme } from "@mui/material";
-import Title from "../../../atoms/Title/Title.tsx";
+import TabHeader from "../../TabHeader/TabHeader.tsx";
 
 interface ProfileSkillsProps {
   skills: string[];
@@ -15,7 +15,7 @@ const ProfileSkills: React.FC<ProfileSkillsProps> = ({ skills }) => {
   ));
   return (
     <Box>
-      <Title sx={{ marginBottom: theme.spacing(2) }}>Skills</Title>
+      <TabHeader title="Skills" showButton={false} />
       {!skills || skills.length === 0 ? (
         <Typography sx={{ color: theme.palette.text.secondary }}>
           No skills

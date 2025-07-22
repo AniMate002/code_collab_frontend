@@ -5,8 +5,7 @@ import {
 } from "../../../store/api/user.api.ts";
 import { type User, UserGridModes } from "../../../types/user.types.ts";
 import UserGrid from "../../molecules/UserGrid/UserGrid.tsx";
-import Title from "../../atoms/Title/Title.tsx";
-import { useTheme } from "@mui/material";
+import TabHeader from "../../molecules/TabHeader/TabHeader.tsx";
 
 export const ProfileUsersModes = {
   FOLLOWERS: "followers",
@@ -18,7 +17,6 @@ interface ProfileUsersProps {
   user: User;
 }
 const ProfileUsers: React.FC<ProfileUsersProps> = ({ mode, user }) => {
-  const theme = useTheme();
   const { data: followers, isLoading: isLoadingFollowers } =
     useGetUserFollowersQuery(user._id.toString(), {
       skip: mode === ProfileUsersModes.FOLLOWING,
@@ -37,9 +35,10 @@ const ProfileUsers: React.FC<ProfileUsersProps> = ({ mode, user }) => {
   if (isLoadingFollowing || isLoadingFollowers) return <div>Loading...</div>;
   return (
     <div>
-      <Title sx={{ marginBottom: theme.spacing(2) }}>
-        {mode === ProfileUsersModes.FOLLOWING ? "Following" : "Followers"}
-      </Title>
+      <TabHeader
+        title={mode === ProfileUsersModes.FOLLOWING ? "Following" : "Followers"}
+        showButton={false}
+      />
       <UserGrid
         mode={UserGridModes.COMPACT}
         users={users || []}

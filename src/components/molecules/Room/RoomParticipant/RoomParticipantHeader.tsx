@@ -55,7 +55,6 @@ const RoomParticipantHeader: React.FC<Room> = ({
           {description}
         </RoomParticipantHeaderLeaveDescriptionWrapper>
       </Box>
-      {/*TODO: Add edit room functionality*/}
       {isAdmin ? (
         <StyledRoomParticipantHeaderLeaveButton
           onClick={() => navigate(RouterPaths.EDIT_ROOM(_id.toString()))}

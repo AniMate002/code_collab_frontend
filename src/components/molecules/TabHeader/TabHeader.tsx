@@ -15,7 +15,6 @@ type TabHeaderProps =
       onClick: any;
       showButton: true;
     };
-// TODO: Apply this TabHeader to all tabs in Profile
 const TabHeader: React.FC<TabHeaderProps> = (props) => {
   const theme = useTheme();
   return (

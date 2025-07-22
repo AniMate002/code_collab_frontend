@@ -10,8 +10,6 @@ interface RoomActivityProps {
 
 const RoomActivity: React.FC<RoomActivityProps> = ({ roomId }) => {
   const { data: activities, isLoading } = useGetRoomActivityQuery(roomId);
-  // TODO: add skeleton loading
-  if (isLoading) return <div>Loading...</div>;
   return (
     <>
       <TabHeader title={"Activity"} showButton={false} />

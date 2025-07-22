@@ -9,7 +9,7 @@ import {
   RoomTypes,
 } from "../../../constants/room.const.ts";
 import Switch from "../../atoms/Switch/Switch.tsx";
-import { FormControlLabel } from "@mui/material";
+import { FormControlLabel, Skeleton } from "@mui/material";
 import ImagePicker from "../../atoms/ImagePicker/ImagePicker.tsx";
 import Button from "../../atoms/Button/Button.tsx";
 import { useForm } from "react-hook-form";
@@ -125,6 +125,19 @@ const RoomForm: React.FC<RoomFormProps> = ({ defaultValues, mode }) => {
       >
         {mode === RoomFormModes.CREATE ? "Create room" : "Save room"}
       </Button>
+    </CreateRoomFormWrapper>
+  );
+};
+
+export const RoomFormSkeleton = () => {
+  return (
+    <CreateRoomFormWrapper>
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={160} />
+      <Skeleton variant="rounded" width={"100%"} height={30} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
+      <Skeleton variant="rounded" width={"100%"} height={60} />
     </CreateRoomFormWrapper>
   );
 };
