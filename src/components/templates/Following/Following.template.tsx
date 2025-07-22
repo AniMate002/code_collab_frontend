@@ -15,16 +15,30 @@ const FollowingTemplate: React.FC<FollowingTemplateProps> = ({
   users,
 }) => {
   const theme = useTheme();
+  const [searchedFollowing, setSearchedFollowing] = React.useState<
+    User[] | null
+  >(null);
+  const [isLoadingSearchingFollowing, setIsLoadingSearchingFollowing] =
+    React.useState(false);
   return (
     <>
-      <Searchbar />
+      <Searchbar
+        exploreTabValue={1}
+        setSearchedRooms={() => {}}
+        setIsLoadingSearch={setIsLoadingSearchingFollowing}
+        setSearchedUsers={setSearchedFollowing}
+      />
       <Title
         sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(2) }}
       >
         Following
       </Title>
 
-      <UserGrid users={users} isLoading={isLoading} mode={UserGridModes.FULL} />
+      <UserGrid
+        users={searchedFollowing || users}
+        isLoading={isLoading || isLoadingSearchingFollowing}
+        mode={UserGridModes.FULL}
+      />
     </>
   );
 };
